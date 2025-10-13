@@ -5,11 +5,19 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "jest --runInBand --coverage"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^12.4.1",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
