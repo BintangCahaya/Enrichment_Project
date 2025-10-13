@@ -2,31 +2,36 @@ name: Backend CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # 1️⃣ Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      # 2️⃣ Setup Node.js (match your local version)
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'   # adjust if your local Node version is different
 
+      # 3️⃣ Install backend dependencies
       - name: Install dependencies
-        working-directory: ./backend
         run: npm install
+        working-directory: backend
 
+      # 4️⃣ Run backend tests with Jest
       - name: Run tests
-        working-directory: ./backend
         run: npm test
+        working-directory: backend
 
-      - name: Verify server startup
-        working-directory: ./backend
-        run: node server.js &
+      # 5️⃣ Generate coverage report
+      - name: Generate coverage report
+        run: npx jest --coverage
+        working-directory: backend
