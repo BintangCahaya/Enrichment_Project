@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import { View, Text, StyleSheet} from "react-native";
 import {TextInput} from 'react-native-paper';
 import { useState } from "react";
 import { Link, router } from "expo-router";
@@ -6,11 +6,13 @@ import { CustomButton } from "@/components/customBtn";
 
 export default function LoginScreen(){
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [hidden, setHidden] = useState(true);
+    const [room, setRoom] = useState(0);
 
     const handleLogin = () => {
         if (email === 'test' && password === 'test123'){
-            router.navigate("/getStartedScreen");
+            room == 0 ? router.navigate("/getStartedScreen") : router.navigate('/homeScreen')
         }else{
             alert('Wrong email or password');
         }
@@ -23,12 +25,13 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Username or email"
+                    placeholderTextColor={"#ccc"}
                     value={email}
                     onChangeText={setEmail}
                     mode="outlined"
                     outlineColor="#ccc"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="account" />}
+                    left={<TextInput.Icon icon="account" color={'#ccc'}/>}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -39,13 +42,15 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Password"
-                    secureTextEntry
+                    placeholderTextColor={'#ccc'}
+                    secureTextEntry={hidden}
                     value={password}
                     onChangeText={setPassword}
                     mode="outlined"
                     outlineColor="#ccc"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="lock" />}
+                    left={<TextInput.Icon icon="lock" color={'#ccc'}/>}
+                    right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -57,9 +62,9 @@ export default function LoginScreen(){
                 <Link href='/registerScreen' style={styles.miniText}>Forgot Password?</Link>
                 <View style={styles.divider}/>
                 <Text style={styles.miniText}>Don't have an account?</Text>
-                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={handleLogin}/>
+                <CustomButton title="SIGN UP" style={{width: '80%'}} onPress={() => router.navigate('/registerScreen')}/>
                 <Text style={styles.orText}>Or</Text>
-                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={handleLogin}/>
+                <CustomButton title="SIGN IN WITH GOOGLE" style={{width: '80%'}} onPress={handleLogin} icon="logo-google"/>
             </View>
         </View>
     );
@@ -78,8 +83,8 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: '#fff',
         alignItems: 'center',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         padding: 30
     },
     input: {
