@@ -9,6 +9,7 @@ export default function RootLayout(){
                 options={{
                     title: 'Create Kos',
                     headerStyle: {backgroundColor: '#55C595'},
+                    headerShown: true,
                     headerTintColor: '#fff'
                 }}
             />

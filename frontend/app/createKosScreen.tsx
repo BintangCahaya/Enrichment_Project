@@ -71,7 +71,7 @@ export default function CreateKosScreen(){
             </View>
             <SafeAreaView style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Submit" style={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/homeScreen')}/>
+                <CustomButton title="Submit" style={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(tabs)')}/>
             </SafeAreaView>
         </SafeAreaView>
     );

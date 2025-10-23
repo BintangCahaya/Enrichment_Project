@@ -1,20 +1,25 @@
-import { View, Text, StyleSheet} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {TextInput} from 'react-native-paper';
 import { useState } from "react";
 import { Link, router } from "expo-router";
 import { CustomButton } from "@/components/customBtn";
 
-export default function LoginScreen(){
+export default function RegisterScreen(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [conPassword, setConPassword] = useState('');
     const [hidden, setHidden] = useState(true);
-    const [room, setRoom] = useState(0);
 
-    const handleLogin = () => {
-        if (email === 'test' && password === 'test123'){
-            room == 0 ? router.navigate("/getStartedScreen") : router.navigate('/homeScreen')
+    const handleRegister = () => {
+        if(email.length >= 8){
+            if(password === conPassword){
+                alert('Succesfully create account');
+                router.navigate('/auth');
+            }else{
+                alert('password and confirm password field must same')
+            }
         }else{
-            alert('Wrong email or password');
+            alert('Email must contain at least 8 charaacter');
         }
     }
 
@@ -25,13 +30,12 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Username or email"
-                    placeholderTextColor={"#ccc"}
                     value={email}
                     onChangeText={setEmail}
                     mode="outlined"
                     outlineColor="#ccc"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="account" color={'#ccc'}/>}
+                    left={<TextInput.Icon icon="account" />}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -42,14 +46,13 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Password"
-                    placeholderTextColor={'#ccc'}
                     secureTextEntry={hidden}
                     value={password}
                     onChangeText={setPassword}
                     mode="outlined"
                     outlineColor="#ccc"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="lock" color={'#ccc'}/>}
+                    left={<TextInput.Icon icon="lock" />}
                     right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
                     theme={{
                         roundness: 30,
@@ -58,13 +61,31 @@ export default function LoginScreen(){
                         },
                     }}
                 />
-                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={handleLogin}/>
-                <Link href='/registerScreen' style={styles.miniText}>Forgot Password?</Link>
+                <TextInput 
+                    style={styles.input} 
+                    placeholder="Confirm Password"
+                    secureTextEntry={hidden}
+                    value={conPassword}
+                    onChangeText={setConPassword}
+                    mode="outlined"
+                    outlineColor="#ccc"
+                    activeOutlineColor="#55C595"
+                    left={<TextInput.Icon icon="lock" />}
+                    right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
+                    theme={{
+                        roundness: 30,
+                        colors: {
+                            background: '#fff',
+                        },
+                    }}
+                />
+                <CustomButton title="SIGN UP" style={{width: '80%'}} onPress={handleRegister}/>
+                <Link href='/auth/registerScreen' style={styles.miniText}>Forgot Password?</Link>
                 <View style={styles.divider}/>
-                <Text style={styles.miniText}>Don't have an account?</Text>
-                <CustomButton title="SIGN UP" style={{width: '80%'}} onPress={() => router.navigate('/registerScreen')}/>
+                <Text style={styles.miniText}>Already have an account?</Text>
+                <CustomButton title="SIGN IN" style={{width: '80%'}} onPress={() => router.navigate('/auth')}/>
                 <Text style={styles.orText}>Or</Text>
-                <CustomButton title="SIGN IN WITH GOOGLE" style={{width: '80%'}} onPress={handleLogin} icon="logo-google"/>
+                <CustomButton title="SIGN UP USING GOOGLE" style={{width: '80%'}} onPress={handleRegister} icon="logo-google"/>
             </View>
         </View>
     );
@@ -83,8 +104,8 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: '#fff',
         alignItems: 'center',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
         padding: 30
     },
     input: {

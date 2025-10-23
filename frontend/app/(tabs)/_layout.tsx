@@ -1,27 +1,35 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
+import { BackHandler } from "react-native";
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: '#55C595', tabBarShowLabel: false, }}>
+    <Tabs screenOptions={{ 
+      tabBarActiveTintColor: '#55C595', 
+      tabBarShowLabel: false,
+      headerShown: false
+    }}>
       <Tabs.Screen
-        name="homeScreen"
+        name="index"
         options={{
-          title: 'Home',
+          title: 'Dashboard',
+          headerShown: true,
+          headerStyle: {backgroundColor: '#55C595'},
+          headerTintColor: '#fff',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="home" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="tenantScreen"
+        name="tenants"
         options={{
           title: 'Tenant',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="people-sharp" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="roomScreen"
+        name="rooms/index"
         options={{
-          title: '',
+          title: 'Room',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="logo-windows" color={color} />,
         }}
       />
