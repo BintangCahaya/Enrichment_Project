@@ -13,12 +13,6 @@ export default function RootLayout(){
                     headerTintColor: '#fff'
                 }}
             />
-            <Stack.Screen
-                name="addKosModal"
-                options={{
-                    presentation: 'modal',
-                }}
-            />
             <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
         </Stack>
     );

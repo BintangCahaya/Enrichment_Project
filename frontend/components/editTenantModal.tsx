@@ -5,17 +5,17 @@ import { useState } from "react";
 import { CustomButton } from "@/components/customBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import TenantCard from "./tenantCard";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
-export default function AddKosModal(){
-    const [namaUnit, setNamaUnit] = useState('');
-    const [namaArea, setNamaArea] = useState('');
-    const [jumlah, setJumlah] = useState('');
-    const [waktu, setWaktu] = useState('');
-    const [hargaPerBulan, setHargaPerBulan] = useState('');
-    const [hargaPerTahun, setHargaPerTahun] = useState('');
-    const [deskripsi, setDeskripsi] = useState('');
+export default function EditTenantModal({ onClose }: { onClose: () => void }){
+    const [nama, setNama] = useState('');
+    const [jenisKelamin, setJenisKelamin] = useState('');
+    const [noTelpon, setNoTelpon] = useState('');
+    const [email, setEmail] = useState('');
+    const [kamar, setKamar] = useState('');
+    const [tanggal, setTanggal] = useState('');
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
     const pickImageAsync = async () => {
@@ -40,69 +40,58 @@ export default function AddKosModal(){
                 </Pressable>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nama Unit" 
-                    value={namaUnit}
-                    onChangeText={setNamaUnit}
+                    placeholder="Nama" 
+                    value={nama}
+                    onChangeText={setNama}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder="Area" 
-                    value={namaArea}
-                    onChangeText={setNamaArea}
+                    placeholder="Jenis Kelamin" 
+                    value={jenisKelamin}
+                    onChangeText={setJenisKelamin}
                 />
-                <View style={styles.detailContainer}>
-                    <TextInput 
-                        style={[styles.input, {width: '45%'}]}
-                        placeholder="Jumlah" 
-                        value={jumlah}
-                        onChangeText={setJumlah}
-                    />
-                    <TextInput 
-                        style={[styles.input, {width: '35%'}]}
-                        placeholder="Waktu" 
-                        value={waktu}
-                        onChangeText={setWaktu}
-                    />
-                    <CustomButton title="+" style={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
-                </View>
                 <TextInput
                     style={styles.input}
-                    placeholder="Harga Sewa 1 Bulan" 
-                    value={hargaPerBulan}
-                    onChangeText={setHargaPerBulan}
+                    placeholder="Nomor Telepon" 
+                    value={noTelpon}
+                    onChangeText={setNoTelpon}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder="Harga Sewa 1 Tahun" 
-                    value={hargaPerTahun}
-                    onChangeText={setHargaPerTahun}
+                    placeholder="Email" 
+                    value={email}
+                    onChangeText={setEmail}
                 />
-                <TextInput
-                    style={styles.description}
-                    placeholder="Deskripsi & Fasilitas"
-                    value={deskripsi}
-                    onChangeText={setDeskripsi}
-                    multiline
-                    numberOfLines={4}
-                    textAlignVertical="top"
+                <TextInput 
+                    style={styles.input}
+                    placeholder="Unit Kamar" 
+                    value={kamar}
+                    onChangeText={setKamar}
+                />
+                <TextInput 
+                    style={styles.input}
+                    placeholder="Tanggal Akhir Kontrak" 
+                    value={tanggal}
+                    onChangeText={setTanggal}
                 />
             </View>
-            <SafeAreaView style={styles.bottomContainer}>
+            <View style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/createKosScreen')}/>
-            </SafeAreaView>
+                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
+            </View>
         </SafeAreaView>
-    )
-    
+    );
 }
 
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'space-between',
     },
     formContainer: {
         width: '100%',
-        padding: 30
+        padding: 20
     },
     input: {
         width: '100%',
@@ -127,9 +116,9 @@ const styles = StyleSheet.create({
         padding: 10
     },
     bottomContainer: {
-        position: 'absolute',
-        bottom: 0,
-        width: '100%'
+        justifyContent: 'flex-end',
+        width: '100%',
+        // marginTop: 40,
     },
     divider: {
         borderWidth: 0.5,

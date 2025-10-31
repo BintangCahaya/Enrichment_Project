@@ -5,6 +5,8 @@ import { Pressable, StyleSheet, Text, TextInput, TouchableHighlight, View } from
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
+import CustomPopup from "@/components/customPopup";
+import AddRoomModal from "@/components/addRoomModal";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -14,6 +16,10 @@ export default function CreateKosScreen(){
     const [kontak, setKontak] = useState('');
     const [metode, setMetode] = useState('');
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+    const [showPopup, setShowPopup] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [namaBank, setNamaBank] = useState('');
+    const [nomorBank, setNomorBank] = useState('');
 
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,16 +60,33 @@ export default function CreateKosScreen(){
                     value={kontak}
                     onChangeText={setKontak}
                 />
-                <TextInput 
-                    style={styles.input}
-                    placeholder="Payment Method" 
-                    value={metode}
-                    onChangeText={setMetode}
-                />
+                <Pressable style={[styles.input, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]} onPress={() => setOpen(!open)}>
+                    <Text>Payment Method</Text>
+                    <Text>V</Text>
+                </Pressable>
+                {open && (
+                    <View>
+                        <TextInput 
+                            style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
+                            placeholder="Nama Bank" 
+                            value={namaBank}
+                            onChangeText={setNamaBank}
+                        />
+                        <TextInput 
+                            style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
+                            placeholder="Nomor Bank" 
+                            value={nomorBank}
+                            onChangeText={setNomorBank}
+                        />
+                    </View>
+                )}
                 <View style={styles.divider}/>
                 <View style={{alignItems: 'flex-end'}}>
-                    <CustomButton title="Add Room" style={{width: '40%'}} onPress={() => router.navigate('/addKosModal')}/>
+                    <CustomButton title="Add Room" style={{width: '40%'}} onPress={() => setShowPopup(true)}/>
                 </View>
+                <CustomPopup visible={showPopup} onClose={() => setShowPopup(false)}>
+                    <AddRoomModal onClose={() => setShowPopup(false)}/>
+                </CustomPopup>
                 <View style={styles.roomInfoContainer}>
                     <Text>Room 001</Text>
                     <Text>Edit detail</Text>

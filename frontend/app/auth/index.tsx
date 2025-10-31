@@ -10,9 +10,28 @@ export default function LoginScreen(){
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(true);
     const [room, setRoom] = useState(0);
+    const [error, setError] = useState('');
 
-    const handleLogin = () => {
-        if (email === 'test' && password === 'test123'){
+    const validate = () => {
+        if(!email || !password){
+            setError('Email dan password wajib diisi.');
+            return false;
+        }
+        if(email.length < 8){
+            setError('Email minimal 8 karakter.');
+            return false;
+        }
+        if(password.length < 8){
+            setError('Password minimal 8 karakter.');
+            return false;
+        }
+        return true;
+    };
+
+    const handleLogin = async () => {
+        if(!validate()) return;
+
+        if (email === 'test1234' && password === 'test1234'){
             room == 0 ? router.replace("/getStartedScreen") : router.replace('/(tabs)')
         }else{
             alert('Wrong email or password');
@@ -59,6 +78,7 @@ export default function LoginScreen(){
                         },
                     }}
                 />
+                {error ? <Text style={styles.error}>{error}</Text> : null}
                 <CustomButton title="LOGIN" style={{width: '80%'}} onPress={handleLogin}/>
                 <Link href='/auth/registerScreen' style={styles.miniText}>Forgot Password?</Link>
                 <View style={styles.divider}/>
@@ -106,4 +126,9 @@ const styles = StyleSheet.create({
         fontSize: 10,
         marginVertical: 15
     },
+    error: {
+        color: 'red',
+        justifyContent: 'center',
+        marginVertical: 10
+    }
 });

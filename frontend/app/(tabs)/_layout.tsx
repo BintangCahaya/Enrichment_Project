@@ -27,7 +27,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="rooms/index"
+        name="rooms"
         options={{
           title: 'Room',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="logo-windows" color={color} />,

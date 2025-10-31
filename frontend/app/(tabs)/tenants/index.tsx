@@ -18,6 +18,11 @@ export default function TenantScreen(){
         setTenant([
             { id: 1, name: "Budi", room: "A1", status: "Aktif" },
             { id: 2, name: "Siti", room: "B2", status: "Tidak Aktif" },
+            { id: 3, name: "Budi", room: "A1", status: "Aktif" },
+            { id: 4, name: "Siti", room: "B2", status: "Tidak Aktif" },
+            { id: 5, name: "Budi", room: "A1", status: "Aktif" },
+            { id: 6, name: "Siti", room: "B2", status: "Tidak Aktif" },
+            { id: 7, name: "Budi", room: "A1", status: "Aktif" },
         ]);
     };
 
@@ -42,29 +47,11 @@ export default function TenantScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 30,
+        padding: 20,
     },
     emptyContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    cardContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderRadius: 10,
-        borderColor: '#000000',
-        borderWidth: 0.5,
-        width: '100%',
-    },
-    profileContainer:{ 
-
-    },
-    infoContainer: {
-
-    },
-    btn: {
-
-    }
 });

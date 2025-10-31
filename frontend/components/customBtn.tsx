@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, Text, TouchableHighlight, TouchableOpacity, ViewStyle } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface CustomButtonProps {
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         borderRadius: 30,
+        elevation: 3, // Android
+        shadowColor: '#000', // iOS
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        shadowOffset: { width: 0, height: 2 },
     },
     btnText: {
         color: '#fff'

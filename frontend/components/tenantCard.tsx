@@ -18,11 +18,13 @@ export default function TenantCard({tenant} : TenantCardProps){
     const {id, name, room, status} = tenant;
     return(
         <View style={styles.cardContainer}>
-            <Ionicons size={40} name="people-circle-outline" color={'#000000'}/>
-            <View style={styles.infoContainer}>
-                <Text>{name}</Text>
-                <Text>{room}</Text>
-                <Text>{status}</Text>
+            <View style={styles.profileContainer}>
+                <Ionicons size={60} name="people-circle-outline" color={'#000000'}/>
+                <View>
+                    <Text style={styles.name}>{name}</Text>
+                    <Text style={styles.room}>{room}</Text>
+                    <Text style={{color: status === 'Aktif' ? 'green' : 'red'}}>{status}</Text>
+                </View>
             </View>
             <CustomButton title="Details" style={{width: 80}} onPress={() => router.push(`/(tabs)/tenants/${id}`)}/>
         </View>
@@ -32,21 +34,33 @@ export default function TenantCard({tenant} : TenantCardProps){
 const styles = StyleSheet.create({
     cardContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
         borderColor: '#000000',
-        borderWidth: 0.5,
+        borderWidth: 0.4,
         width: '100%',
-        marginVertical: 10
+        marginVertical: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        elevation: 8,
+        backgroundColor: '#fff',
     },
     profileContainer:{ 
-
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 20
     },
-    infoContainer: {
-
+    name: {
+        fontSize: 18,
+        fontFamily: 'league spartan',
+        fontWeight: 'bold',
+        color: '#787878'
     },
-    btn: {
-
+    room: {
+        color: '#b4b4b4'
     },
+    status: {
+
+    }
 });
