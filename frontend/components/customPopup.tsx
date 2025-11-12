@@ -20,9 +20,7 @@ export default function CustomPopup ({ style, visible, onClose, children }: Cust
             <View style={styles.overlay}>
                 <Pressable style={styles.background} onPress={onClose} />
                 <View style={[styles.popupContainer, style]}>
-                    <ScrollView style={{width: '100%'}}>
-                        {children}
-                    </ScrollView>
+                    {children}
                 </View>
             </View>
         </Modal>
@@ -40,8 +38,6 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     popupContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
         width: '90%',
         height: '85%',
         backgroundColor: '#fff', 

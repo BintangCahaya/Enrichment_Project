@@ -34,7 +34,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="financeScreen"
+        name="finances"
         options={{
           // title: 'Tenant',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="podium-sharp" color={color} />,

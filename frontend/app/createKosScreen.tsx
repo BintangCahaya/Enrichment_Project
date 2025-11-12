@@ -1,12 +1,13 @@
 import { CustomButton } from "@/components/customBtn";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
 import CustomPopup from "@/components/customPopup";
 import AddRoomModal from "@/components/addRoomModal";
+import DropDown from "@/components/dropDown";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -37,8 +38,8 @@ export default function CreateKosScreen(){
 
 
     return(
-        <SafeAreaView style={styles.container}>
-            <View style={styles.formContainer}>
+        <View style={styles.container}>
+            <ScrollView style={styles.formContainer}>
                 <Pressable onPress={pickImageAsync}>
                     <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
                 </Pressable>
@@ -60,43 +61,37 @@ export default function CreateKosScreen(){
                     value={kontak}
                     onChangeText={setKontak}
                 />
-                <Pressable style={[styles.input, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]} onPress={() => setOpen(!open)}>
-                    <Text>Payment Method</Text>
-                    <Text>V</Text>
-                </Pressable>
-                {open && (
-                    <View>
-                        <TextInput 
-                            style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
-                            placeholder="Nama Bank" 
-                            value={namaBank}
-                            onChangeText={setNamaBank}
-                        />
-                        <TextInput 
-                            style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
-                            placeholder="Nomor Bank" 
-                            value={nomorBank}
-                            onChangeText={setNomorBank}
-                        />
-                    </View>
-                )}
+                <DropDown title="Payment Method">
+                    <TextInput 
+                        style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
+                        placeholder="Nama Bank" 
+                        value={namaBank}
+                        onChangeText={setNamaBank}
+                    />
+                    <TextInput 
+                        style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
+                        placeholder="Nomor Bank" 
+                        value={nomorBank}
+                        onChangeText={setNomorBank}
+                    />
+                </DropDown>
                 <View style={styles.divider}/>
                 <View style={{alignItems: 'flex-end'}}>
                     <CustomButton title="Add Room" style={{width: '40%'}} onPress={() => setShowPopup(true)}/>
                 </View>
-                <CustomPopup visible={showPopup} onClose={() => setShowPopup(false)}>
+                <CustomPopup style={{height: '80%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
                     <AddRoomModal onClose={() => setShowPopup(false)}/>
                 </CustomPopup>
                 <View style={styles.roomInfoContainer}>
                     <Text>Room 001</Text>
                     <Text>Edit detail</Text>
                 </View>
-            </View>
+            </ScrollView>
             <SafeAreaView style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
                 <CustomButton title="Submit" style={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(tabs)')}/>
             </SafeAreaView>
-        </SafeAreaView>
+        </View>
     );
 }
 
@@ -106,7 +101,7 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         width: '100%',
-        padding: 30
+        padding: 20
     },
     input: {
         width: '100%',
