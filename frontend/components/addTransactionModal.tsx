@@ -1,7 +1,32 @@
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 import { CustomButton } from "./customBtn";
+import { useState } from "react";
+import * as DocumentPicker from "expo-document-picker";
 
 export default function AddTransactionModal({ onClose }: { onClose: () => void }){
+    const [file, setFile] = useState<DocumentPicker.DocumentPickerAsset | null>(null);
+
+    const pickDocument = async () => {
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+                type: '*/*', // semua jenis file
+                copyToCacheDirectory: true,
+            });
+
+            if (result.canceled) {
+                console.log('User canceled');
+                return;
+            }
+
+            // Akses file dari result.assets[0]
+            const pickedFile = result.assets[0];
+            console.log(pickedFile);
+            setFile(pickedFile);
+        } catch (err) {
+            console.error('Error picking document:', err);
+        }
+    };
+
     return(
         <View style={styles.container}>
             <ScrollView
@@ -29,8 +54,16 @@ export default function AddTransactionModal({ onClose }: { onClose: () => void }
                 </View>
                 <View style={styles.upload}>
                     <Text>Bukti Pembayaran</Text>
-                    <CustomButton title="Upload" style={{width: '40%', borderRadius: 0}} onPress={() => alert('button clicked')}/>
+                    <CustomButton title="Upload" style={{width: '40%', borderRadius: 0}} onPress={() => pickDocument()}/>
                 </View>
+                {file && (
+                    <View style={{ marginTop: 20 }}>
+                        <Text>Nama File: {file.name}</Text>
+                        <Text>Tipe: {file.mimeType}</Text>
+                        <Text>Ukuran: {(file.size ?? 0) / 1024} KB</Text>
+                        <Text>URI: {file.uri}</Text>
+                    </View>
+                )}
             </ScrollView>
                 
             <View style={styles.bottomContainer}>

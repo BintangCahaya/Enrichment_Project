@@ -9,7 +9,7 @@ import TenantCard from "./tenantCard";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
-export default function EditTenantModal({ onClose }: { onClose: () => void }){
+export default function AssignTenantModal({ onClose }: { onClose: () => void }){
     const [nama, setNama] = useState('');
     const [jenisKelamin, setJenisKelamin] = useState('');
     const [noTelpon, setNoTelpon] = useState('');

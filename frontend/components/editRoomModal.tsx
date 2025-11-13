@@ -9,13 +9,14 @@ import TenantCard from "./tenantCard";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
-export default function EditTenantModal({ onClose }: { onClose: () => void }){
-    const [nama, setNama] = useState('');
-    const [jenisKelamin, setJenisKelamin] = useState('');
-    const [noTelpon, setNoTelpon] = useState('');
-    const [email, setEmail] = useState('');
-    const [kamar, setKamar] = useState('');
-    const [tanggal, setTanggal] = useState('');
+export default function EditRoomModal({ onClose }: { onClose: () => void }){
+    const [namaUnit, setNamaUnit] = useState('');
+    const [namaArea, setNamaArea] = useState('');
+    const [jumlah, setJumlah] = useState('');
+    const [waktu, setWaktu] = useState('');
+    const [hargaPerBulan, setHargaPerBulan] = useState('');
+    const [hargaPerTahun, setHargaPerTahun] = useState('');
+    const [deskripsi, setDeskripsi] = useState('');
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
     const pickImageAsync = async () => {
@@ -40,39 +41,51 @@ export default function EditTenantModal({ onClose }: { onClose: () => void }){
                 </Pressable>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nama" 
-                    value={nama}
-                    onChangeText={setNama}
+                    placeholder="Nama Unit" 
+                    value={namaUnit}
+                    onChangeText={setNamaUnit}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder="Jenis Kelamin" 
-                    value={jenisKelamin}
-                    onChangeText={setJenisKelamin}
+                    placeholder="Area" 
+                    value={namaArea}
+                    onChangeText={setNamaArea}
                 />
+                <View style={styles.detailContainer}>
+                    <TextInput 
+                        style={[styles.input, {width: '45%'}]}
+                        placeholder="Jumlah" 
+                        value={jumlah}
+                        onChangeText={setJumlah}
+                    />
+                    <TextInput 
+                        style={[styles.input, {width: '35%'}]}
+                        placeholder="Waktu" 
+                        value={waktu}
+                        onChangeText={setWaktu}
+                    />
+                    <CustomButton title="+" style={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
+                </View>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nomor Telepon" 
-                    value={noTelpon}
-                    onChangeText={setNoTelpon}
+                    placeholder="Harga Sewa 1 Bulan" 
+                    value={hargaPerBulan}
+                    onChangeText={setHargaPerBulan}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder="Email" 
-                    value={email}
-                    onChangeText={setEmail}
+                    placeholder="Harga Sewa 1 Tahun" 
+                    value={hargaPerTahun}
+                    onChangeText={setHargaPerTahun}
                 />
-                <TextInput 
-                    style={styles.input}
-                    placeholder="Unit Kamar" 
-                    value={kamar}
-                    onChangeText={setKamar}
-                />
-                <TextInput 
-                    style={styles.input}
-                    placeholder="Tanggal Akhir Kontrak" 
-                    value={tanggal}
-                    onChangeText={setTanggal}
+                <TextInput
+                    style={styles.description}
+                    placeholder="Deskripsi & Fasilitas"
+                    value={deskripsi}
+                    onChangeText={setDeskripsi}
+                    multiline
+                    numberOfLines={4}
+                    textAlignVertical="top"
                 />
                 <View style={{alignItems: 'center'}}>
                     <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>

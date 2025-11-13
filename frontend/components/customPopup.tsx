@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     },
     popupContainer: {
         width: '90%',
-        height: '85%',
+        maxHeight: '85%',
+        flexShrink: 1,
         backgroundColor: '#fff', 
         borderRadius: 16,
         overflow: 'hidden',

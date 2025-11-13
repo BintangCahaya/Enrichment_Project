@@ -2,7 +2,8 @@ import { CustomButton } from "@/components/customBtn";
 import TransactionCard from "@/components/transactionCard";
 import { router } from "expo-router";
 import { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { LineChart } from 'react-native-chart-kit';
 
 export default function FinanceScreen(){
     const [profit, setProfit] = useState('Rp. 18.000.000,-');
@@ -31,6 +32,28 @@ export default function FinanceScreen(){
         
     ];
 
+    const screenWidth = Dimensions.get('window').width;
+
+const data = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  datasets: [
+    {
+        data: [20, 45, 28, 80, 99, 43],
+        color: (opacity = 1) => `rgba(34, 197, 94, ${opacity})`, // hijau seperti grafik profit
+        strokeWidth: 3,
+    },
+  ],
+};
+
+const chartConfig = {
+  backgroundGradientFrom: '#ffffff',
+  backgroundGradientTo: '#ffffff',
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(34, 197, 94, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+  propsForDots: { r: '4', strokeWidth: '2', stroke: '#22c55e' },
+};
+
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -46,6 +69,20 @@ export default function FinanceScreen(){
             </View>
             <View>
                 <Text>Ini Grafik</Text>
+                <LineChart
+        data={data}
+        width={screenWidth - 40}
+        height={250}
+        yAxisLabel="Rp "
+        yAxisSuffix=""
+        yAxisInterval={1}
+        chartConfig={chartConfig}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+        }}
+      />
             </View>
             <CustomButton title="RP. 2.800.000,-" style={{alignSelf: 'flex-end'}} onPress={() => alert('Button clicked')}/>
             <View style={styles.transactionheader}>
