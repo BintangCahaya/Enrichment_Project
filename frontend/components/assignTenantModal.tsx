@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
 import { useState } from "react";
@@ -6,10 +6,12 @@ import { CustomButton } from "@/components/customBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import TenantCard from "./tenantCard";
+import PopupHeader from "./popupHeader";
+import { Ionicons } from "@expo/vector-icons";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
-export default function AssignTenantModal({ onClose }: { onClose: () => void }){
+export default function AssignTenantModal({ onClose, room }: any){
     const [nama, setNama] = useState('');
     const [jenisKelamin, setJenisKelamin] = useState('');
     const [noTelpon, setNoTelpon] = useState('');
@@ -34,10 +36,18 @@ export default function AssignTenantModal({ onClose }: { onClose: () => void }){
 
     return(
         <SafeAreaView style={styles.container}>
+            <PopupHeader title="Assign Tenant"/>
             <View style={styles.formContainer}>
-                <Pressable onPress={pickImageAsync}>
-                    <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
-                </Pressable>
+                <View style={styles.formHeader}>
+                    <Pressable onPress={pickImageAsync}>
+                        <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+                    </Pressable>
+                    <View style={[styles.roomNumber, {backgroundColor: room.status == 'kosong' ? '#8d8d8d' : '#55C595'}]}>
+                        <Ionicons name="bed-outline" size={40} color='#fff'/>
+                        <Text style={{fontSize: 20, color: '#fff'}}>{room.roomNumber}</Text>
+                    </View>
+                </View>
+                
                 <TextInput
                     style={styles.input}
                     placeholder="Nama" 
@@ -74,9 +84,6 @@ export default function AssignTenantModal({ onClose }: { onClose: () => void }){
                     value={tanggal}
                     onChangeText={setTanggal}
                 />
-                <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
-                </View>
             </View>
             <View style={styles.bottomContainer}>
                 <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
@@ -88,17 +95,20 @@ export default function AssignTenantModal({ onClose }: { onClose: () => void }){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#fff',
-        justifyContent: 'space-between',
     },
     formContainer: {
         width: '100%',
         padding: 20
     },
+    formHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 10
+    },
     input: {
         width: '100%',
         padding: 10,
-        marginVertical: 10,
+        marginVertical: 5,
         borderRadius: 10,
         borderColor: '#ccc',
         borderWidth: 1
@@ -123,5 +133,16 @@ const styles = StyleSheet.create({
         width: '100%',
         borderWidth: 0.5,
         borderColor: '#ccc',
+    },
+    roomNumber: {
+        flexDirection: 'row',
+        padding: 10,
+        backgroundColor: '#8d8d8d',
+        gap: 5,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: 10,
+        height: 60,
+        alignSelf: 'flex-end'
     },
 });

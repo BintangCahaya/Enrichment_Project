@@ -14,7 +14,7 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
   const [isViewModalVisible, setViewModalVisible] = useState(false);
 
   return (
-    <CustomPopup style={{height: 'auto'}} visible={visible} onClose={onClose}>
+    <CustomPopup style={{height: '40%'}} visible={visible} onClose={onClose}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={[styles.roomNumber, {backgroundColor: room.status == 'kosong' ? '#8d8d8d' : '#55C595'}]}>
@@ -25,7 +25,7 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
           {room.status === 'terisi' ? (
             <CustomButton title="View Tenant" style={{width: '40%', marginLeft: 10, borderRadius: 15}} onPress={() => setViewModalVisible(true)}/>
           ) : (
-            <CustomButton title="Assign Tenant" style={{width: '40%', marginLeft: 10, borderRadius: 15}} onPress={() => setAssignModalVisible(true)}/>
+            <CustomButton title="Assign Tenant" style={{width: '42%', borderRadius: 15}} onPress={() => setAssignModalVisible(true)}/>
           )}
         </View>
         <View style={styles.sewaContainer}>
@@ -44,8 +44,8 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
       <CustomPopup style={{height: '85%'}} visible={isEditModalVisible} onClose={() => setEditModalVisible(false)}>
         <EditRoomModal onClose={() => setEditModalVisible(false)}/>
       </CustomPopup>
-      <CustomPopup style={{height: '85%'}} visible={isAssignModalVisible} onClose={() => setAssignModalVisible(false)}>
-        <AssignTenantModal onClose={() => setAssignModalVisible(false)}/>
+      <CustomPopup style={{height: '70%'}} visible={isAssignModalVisible} onClose={() => setAssignModalVisible(false)}>
+        <AssignTenantModal room={room} onClose={() => setAssignModalVisible(false)}/>
       </CustomPopup>
       <CustomPopup style={{height: '40%'}} visible={isViewModalVisible} onClose={() => setViewModalVisible(false)}>
         <ViewTenantModal onClose={() => setViewModalVisible(false)}/>
@@ -56,7 +56,8 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20
+    flex: 1,
+    padding: 20,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
     gap: 5,
     borderBottomColor: '#000000',
     borderBottomWidth: 0.5,
-    paddingBottom: 20
+    paddingBottom: 20,
+    backgroundColor: 'black'
   },
   roomNumber: {
     flexDirection: 'row',

@@ -5,14 +5,14 @@ import { StyleSheet, Text, View } from "react-native";
 export default function GetStartedScreen(){
     return(
         <View style={styles.container}>
-            <Text>You don't have a kos yet</Text>
+            <Text style={{fontFamily: 'LeagueSpartan_400Regular', color: '#8d8d8d'}}>You don't have a kos yet</Text>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>GET</Text>
                 <Text style={styles.title}>STARTED</Text>
                 <Text style={styles.title}>NOW</Text>
             </View>
             
-            <CustomButton title="CREATE KOS" style={{width: '40%'}} onPress={() => router.navigate('/createKosScreen')}/>
+            <CustomButton title="GET STARTED" style={{width: '40%'}} onPress={() => router.navigate('/createKosScreen')}/>
         </View>
     );
 }
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 20
+        gap: 20,
+        backgroundColor: '#fff'
     },
     titleContainer: {
         justifyContent: 'center',
@@ -30,7 +31,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 28,
-        fontWeight: 'bold',
-        color: '#55C595'
+        lineHeight: 28,
+        color: '#55C595',
+        fontFamily: 'LeagueSpartan_700Bold',
     }
 });

@@ -16,13 +16,13 @@ export default function TenantScreen(){
 
     const handleAddTenant = () => {
         setTenant([
-            { id: 1, name: "Budi", room: "A1", status: "Aktif" },
-            { id: 2, name: "Siti", room: "B2", status: "Tidak Aktif" },
-            { id: 3, name: "Budi", room: "A1", status: "Aktif" },
-            { id: 4, name: "Siti", room: "B2", status: "Tidak Aktif" },
-            { id: 5, name: "Budi", room: "A1", status: "Aktif" },
-            { id: 6, name: "Siti", room: "B2", status: "Tidak Aktif" },
-            { id: 7, name: "Budi", room: "A1", status: "Aktif" },
+            { id: 1, name: "Budi", room: "A1", status: "Lunas" },
+            { id: 2, name: "Siti", room: "B2", status: "Tidak Lunas" },
+            { id: 3, name: "Budi", room: "A1", status: "Lunas" },
+            { id: 4, name: "Siti", room: "B2", status: "Tidak Lunas" },
+            { id: 5, name: "Budi", room: "A1", status: "Lunas" },
+            { id: 6, name: "Siti", room: "B2", status: "Tidak Lunas" },
+            { id: 7, name: "Budi", room: "A1", status: "Lunas" },
         ]);
     };
 
@@ -30,15 +30,18 @@ export default function TenantScreen(){
         <View style={styles.container}>
             {tenant.length === 0 ? (
                 <View style={styles.emptyContainer}>
-                    <Text>Belum ada tenant.</Text>
+                    <Text style={{fontFamily: 'LeagueSpartan_400Regular', color: '#8d8d8d', fontSize: 16}}>No tenant yet</Text>
                     <CustomButton title="ASSIGN TO ROOM" onPress={handleAddTenant} />
                 </View>
             ) : (
-                <FlatList
-                    data={tenant}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <TenantCard tenant={item} />}
-                />
+                <View>
+                    <Text style={{marginBottom: 10}}>Filter</Text>
+                    <FlatList
+                        data={tenant}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => <TenantCard tenant={item} />}
+                    />
+                </View>
             )}
         </View>
     );
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
+        backgroundColor: '#fff'
     },
     emptyContainer: {
         flex: 1,

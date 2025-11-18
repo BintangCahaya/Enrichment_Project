@@ -6,6 +6,7 @@ import { CustomButton } from "@/components/customBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import TenantCard from "./tenantCard";
+import PopupHeader from "./popupHeader";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -34,8 +35,9 @@ export default function EditTenantModal({ onClose }: { onClose: () => void }){
 
     return(
         <SafeAreaView style={styles.container}>
+            <PopupHeader title="Edit Tenant"/>
             <View style={styles.formContainer}>
-                <Pressable onPress={pickImageAsync}>
+                <Pressable style={{marginBottom: 10}} onPress={pickImageAsync}>
                     <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
                 </Pressable>
                 <TextInput
@@ -75,7 +77,7 @@ export default function EditTenantModal({ onClose }: { onClose: () => void }){
                     onChangeText={setTanggal}
                 />
                 <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
+                    <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%', marginTop: 15}} onPress={() => alert('Tenant removed')}/>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
@@ -88,8 +90,6 @@ export default function EditTenantModal({ onClose }: { onClose: () => void }){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#fff',
-        justifyContent: 'space-between',
     },
     formContainer: {
         width: '100%',
@@ -98,10 +98,11 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         padding: 10,
-        marginVertical: 10,
+        marginVertical: 5,
         borderRadius: 10,
         borderColor: '#ccc',
-        borderWidth: 1
+        borderWidth: 1,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     detailContainer: {
         flexDirection: 'row',
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        borderWidth: 0.5,
-        borderColor: '#ccc',
+        borderTopWidth: 0.7,
+        borderTopColor: '#000000',
     },
 });

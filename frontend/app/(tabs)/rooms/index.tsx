@@ -36,7 +36,7 @@ export default function RoomScreen(){
         <>
             {room.length === 0 ? (
                 <View style={styles.emptyContainer}>
-                    <Text>You dont have any room</Text>
+                    <Text style= {{fontFamily: 'LeagueSpartan_400Regular', color: '#8d8d8d', fontSize: 16}}>You don't have any room</Text>
                     <CustomButton title="ADD ROOM" style={{width: '40%'}} onPress={handleAddRoom} />
                 </View>
             ) : (
@@ -53,12 +53,12 @@ export default function RoomScreen(){
                                 <Text style={styles.kosong}>{room.filter((r) => r.status === "kosong").length}</Text>
                             </View>              
                         </View>
-                        <View style={{width: 100, alignItems: 'center'}}>
+                        <View style={{alignItems: 'center', width: '35%'}}>
                             <View style={styles.totalContainer}>
-                                <Text>{room.length}</Text>
-                                <Text>Kamar</Text>
+                                <Text style={[styles.total]}>{room.length}</Text>
+                                <Text style={[styles.total, {fontSize: 20, color: '#8d8d8d'}]}>Kamar</Text>
                             </View>
-                            <CustomButton title="Kamar" style={{width: '90%', borderRadius: 10}} onPress={() => alert('Button clicked')} icon="add-outline"/>
+                            <CustomButton title="Kamar" style={{width: '90%', borderRadius: 10}} onPress={() => alert('Button clicked')} />
                         </View>
                     </View>
                     <View style={styles.roomList}>
@@ -83,12 +83,14 @@ export default function RoomScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20
+        padding: 20,
+        backgroundColor: '#fff'
     },
     emptyContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#fff'
     },
     headerContainer: {
         flexDirection: 'row',
@@ -97,14 +99,20 @@ const styles = StyleSheet.create({
     },
     infoContainer: {
         borderColor: '#000000',
+        backgroundColor: '#fff',
         borderWidth: 0.8,
         borderRadius: 12,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        elevation: 8, // Android
+        shadowColor: '#000', // iOS
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        shadowOffset: { width: 0, height: 2 },
     },
     infoDetailContainer: {
         alignItems: 'center',
         paddingHorizontal: 30,
-        paddingVertical: 5
+        paddingVertical: 5,
     },
     divider: {
         borderColor: '#000A00',
@@ -114,30 +122,51 @@ const styles = StyleSheet.create({
     },
     terisiHeader: {
         fontSize: 18,
-        color: '#55C595'
+        color: '#55C595',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     kosongHeader: {
-        fontSize: 18,
-        color: '#8D8D8D'
+        fontSize: 20,
+        color: '#8D8D8D',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     terisi: {
-        fontSize: 48,
-        color: '#55C595'
+        fontSize: 50,
+        lineHeight: 46,
+        marginTop: 10,
+        color: '#55C595',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     kosong: {
         fontSize: 48,
-        color: '#8D8D8D'
+        lineHeight: 46,
+        marginTop: 10,
+        color: '#8D8D8D',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     totalContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         borderColor: '#000000',
+        backgroundColor: '#fff',
         borderWidth: 0.7,
         padding: 10,
-        gap: 5,
+        gap: 15,
         width: '100%',
+        elevation: 8, // Android
+        shadowColor: '#000', // iOS
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        shadowOffset: { width: 0, height: 2 },
+    },
+    total: {
+        fontSize: 28,
+        lineHeight: 22,
+        color: '#55C595',
+        fontFamily: 'LeagueSpartan_400Regular',
+
     },
     roomList: {
         justifyContent: 'center',

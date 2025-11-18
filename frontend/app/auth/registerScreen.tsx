@@ -5,13 +5,14 @@ import { Link, router } from "expo-router";
 import { CustomButton } from "@/components/customBtn";
 
 export default function RegisterScreen(){
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [conPassword, setConPassword] = useState('');
     const [hidden, setHidden] = useState(true);
 
     const handleRegister = () => {
-        if(email.length >= 8){
+        if(username.length >= 8){
             if(password === conPassword){
                 alert('Succesfully create account');
                 router.navigate('/auth');
@@ -29,13 +30,31 @@ export default function RegisterScreen(){
             <View style={styles.bottomContainer}>
                 <TextInput 
                     style={styles.input} 
-                    placeholder="Username or email"
+                    placeholder="Username"
+                    placeholderTextColor={'#8d8d8d'}
+                    value={username}
+                    onChangeText={setUsername}
+                    mode="outlined"
+                    outlineColor="#8d8d8d"
+                    activeOutlineColor="#55C595"
+                    left={<TextInput.Icon icon="account" color={'#8d8d8d'}/>}
+                    theme={{
+                        roundness: 30,
+                        colors: {
+                            background: '#fff',
+                        },
+                    }}
+                />
+                <TextInput 
+                    style={styles.input} 
+                    placeholder="Email"
+                    placeholderTextColor={'#8d8d8d'}
                     value={email}
                     onChangeText={setEmail}
                     mode="outlined"
-                    outlineColor="#ccc"
+                    outlineColor="#8d8d8d"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="account" />}
+                    left={<TextInput.Icon icon="email" color={'#8d8d8d'}/>}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -46,13 +65,14 @@ export default function RegisterScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Password"
+                    placeholderTextColor={'#8d8d8d'}
                     secureTextEntry={hidden}
                     value={password}
                     onChangeText={setPassword}
                     mode="outlined"
-                    outlineColor="#ccc"
+                    outlineColor="#8d8d8d"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="lock" />}
+                    left={<TextInput.Icon icon="lock" color={'#8d8d8d'}/>}
                     right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
                     theme={{
                         roundness: 30,
@@ -64,13 +84,14 @@ export default function RegisterScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Confirm Password"
+                    placeholderTextColor={'#8d8d8d'}
                     secureTextEntry={hidden}
                     value={conPassword}
                     onChangeText={setConPassword}
                     mode="outlined"
                     outlineColor="#ccc"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="lock" />}
+                    left={<TextInput.Icon icon="lock" color={'#8d8d8d'} />}
                     right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
                     theme={{
                         roundness: 30,
@@ -79,13 +100,10 @@ export default function RegisterScreen(){
                         },
                     }}
                 />
-                <CustomButton title="SIGN UP" style={{width: '80%'}} onPress={handleRegister}/>
-                <Link href='/auth/registerScreen' style={styles.miniText}>Forgot Password?</Link>
+                <CustomButton title="REGISTER" style={{width: '80%'}} onPress={handleRegister}/>
                 <View style={styles.divider}/>
                 <Text style={styles.miniText}>Already have an account?</Text>
-                <CustomButton title="SIGN IN" style={{width: '80%'}} onPress={() => router.navigate('/auth')}/>
-                <Text style={styles.orText}>Or</Text>
-                <CustomButton title="SIGN UP USING GOOGLE" style={{width: '80%'}} onPress={handleRegister} icon="logo-google"/>
+                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={() => router.navigate('/auth')}/>
             </View>
         </View>
     );
@@ -104,26 +122,30 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: '#fff',
         alignItems: 'center',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         padding: 30
     },
     input: {
         borderRadius: 30,
         width: '100%',
-        marginVertical: 10,
+        marginVertical: 5,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     miniText: {
-        fontSize: 10
+        fontSize: 12,
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#8d8d8d'
     },
     divider: {
         width: '100%',
-        borderWidth: 0.5,
+        borderWidth: 0.7,
         borderColor: '#55C595',
         marginVertical: 20
     },
     orText: {
         fontSize: 10,
-        marginVertical: 15
+        marginVertical: 15,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
 });

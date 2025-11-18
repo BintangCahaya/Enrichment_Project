@@ -98,6 +98,7 @@ export default function CreateKosScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff'
     },
     formContainer: {
         width: '100%',

@@ -11,6 +11,7 @@ export default function LoginScreen(){
     const [hidden, setHidden] = useState(true);
     const [room, setRoom] = useState(0);
     const [error, setError] = useState('');
+    const googleIcon = require('@/assets/images/googleIcon.png');
 
     const validate = () => {
         if(!email || !password){
@@ -45,13 +46,13 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Username or email"
-                    placeholderTextColor={"#ccc"}
+                    placeholderTextColor={"#8d8d8d"}
                     value={email}
                     onChangeText={setEmail}
                     mode="outlined"
-                    outlineColor="#ccc"
+                    outlineColor="#8d8d8d"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="account" color={'#ccc'}/>}
+                    left={<TextInput.Icon icon="account" color={'#8d8d8d'}/>}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -62,14 +63,14 @@ export default function LoginScreen(){
                 <TextInput 
                     style={styles.input} 
                     placeholder="Password"
-                    placeholderTextColor={'#ccc'}
+                    placeholderTextColor={'#8d8d8d'}
                     secureTextEntry={hidden}
                     value={password}
                     onChangeText={setPassword}
                     mode="outlined"
-                    outlineColor="#ccc"
+                    outlineColor="#8d8d8d"
                     activeOutlineColor="#55C595"
-                    left={<TextInput.Icon icon="lock" color={'#ccc'}/>}
+                    left={<TextInput.Icon icon="lock" color={'#8d8d8d'}/>}
                     right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
                     theme={{
                         roundness: 30,
@@ -83,9 +84,9 @@ export default function LoginScreen(){
                 <Link href='/auth/registerScreen' style={styles.miniText}>Forgot Password?</Link>
                 <View style={styles.divider}/>
                 <Text style={styles.miniText}>Don't have an account?</Text>
-                <CustomButton title="SIGN UP" style={{width: '80%'}} onPress={() => router.navigate('/auth/registerScreen')}/>
+                <CustomButton title="REGISTER" style={{width: '80%'}} onPress={() => router.navigate('/auth/registerScreen')}/>
                 <Text style={styles.orText}>Or</Text>
-                <CustomButton title="SIGN IN WITH GOOGLE" style={{width: '80%'}} onPress={handleLogin} icon="logo-google"/>
+                <CustomButton title="Sign In With Google" style={{width: '80%'}} onPress={handleLogin} icon={googleIcon}/>
             </View>
         </View>
     );
@@ -112,9 +113,12 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         width: '100%',
         marginVertical: 10,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     miniText: {
-        fontSize: 10
+        fontSize: 12,
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#8d8d8d'
     },
     divider: {
         width: '100%',
@@ -123,12 +127,15 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     orText: {
-        fontSize: 10,
-        marginVertical: 15
+        fontSize: 12,
+        marginVertical: 10,
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#8d8d8d'
     },
     error: {
         color: 'red',
         justifyContent: 'center',
-        marginVertical: 10
+        marginVertical: 5,
+        fontFamily: 'LeagueSpartan_400Regular',
     }
 });

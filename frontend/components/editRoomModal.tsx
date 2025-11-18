@@ -6,6 +6,7 @@ import { CustomButton } from "@/components/customBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import TenantCard from "./tenantCard";
+import PopupHeader from "./popupHeader";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -35,8 +36,9 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
 
     return(
         <SafeAreaView style={styles.container}>
+            <PopupHeader title="Edit Room"/>
             <View style={styles.formContainer}>
-                <Pressable onPress={pickImageAsync}>
+                <Pressable style={{marginBottom: 10}} onPress={pickImageAsync}>
                     <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
                 </Pressable>
                 <TextInput
@@ -88,7 +90,7 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
                     textAlignVertical="top"
                 />
                 <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
+                    <CustomButton title="Remove Room" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
@@ -101,8 +103,6 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#fff',
-        justifyContent: 'space-between',
     },
     formContainer: {
         width: '100%',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         padding: 10,
-        marginVertical: 10,
+        marginVertical: 5,
         borderRadius: 10,
         borderColor: '#ccc',
         borderWidth: 1

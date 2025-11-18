@@ -28,17 +28,17 @@ export default function HomeScreen(){
                 <View style={{paddingLeft: 5}}>
                     <Text style={styles.statusTitle}>Pembayaran</Text>
                     <View style={styles.statusInfo}>
-                        <Icon source="checkbox-blank-circle" color="green" size={25}/>
+                        <Icon source="checkbox-blank-circle" color="#18E205" size={25}/>
                         <Text style={{color: '#fff'}}>4</Text>
                         <Text style={{color: '#fff'}}>Lunas</Text>
                     </View>
                     <View style={styles.statusInfo}>
-                        <Icon source="checkbox-blank-circle" color="yellow" size={25}/>
+                        <Icon source="checkbox-blank-circle" color="#D7CF00" size={25}/>
                         <Text style={{color: '#fff'}}>0</Text>
                         <Text style={{color: '#fff'}}>Kurang</Text>
                     </View>
                     <View style={styles.statusInfo}>
-                        <Icon source="checkbox-blank-circle" color="red" size={25}/>
+                        <Icon source="checkbox-blank-circle" color="#DA0700" size={25}/>
                         <Text style={{color: '#fff'}}>5</Text>
                         <Text style={{color: '#fff'}}>Belum Bayar</Text>
                     </View>
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        gap: 20
+        gap: 20,
+        backgroundColor: '#fff'
     },
     kosContainer: {
         flex: 1.1,
@@ -89,15 +90,18 @@ const styles = StyleSheet.create({
     },
     kosTitle: {
         fontSize: 22,
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     address: {
         fontSize: 12,
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     totalRoom: {
         fontSize: 14,
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     roomContainer: {
         flex: 1,
@@ -114,12 +118,14 @@ const styles = StyleSheet.create({
     },
     roomInfoTitle: {
         color: '#fff',
-        fontSize: 20
+        fontSize: 25,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     roomInfoDetail: {
         color: '#fff',
         fontSize: 64,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     statusContainer: {
         flex: 1.1,
@@ -132,7 +138,8 @@ const styles = StyleSheet.create({
     },
     statusTitle: {
         color: '#fff',
-        fontSize: 20
+        fontSize: 25,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     statusInfo: {
         flexDirection: 'row',
@@ -151,13 +158,15 @@ const styles = StyleSheet.create({
     },
     financeTitle: {
         color: '#fff',
-        fontSize: 14,
-        marginLeft:10
+        fontSize: 18,
+        marginLeft:10,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     financeInfo: {
         color: '#fff',
-        fontSize: 20,
-        marginLeft: 30
+        fontSize: 22,
+        marginLeft: 30,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     divider: {
         borderWidth: 0.8,
@@ -166,8 +175,10 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     currentTime: {
-        color: '#ccc',
+        color: '#d4d4d4',
         alignSelf: 'center',
-        marginTop: 10
+        marginTop: 5,
+        fontFamily: 'LeagueSpartan_400Regular',
+        fontSize: 14
     }
 });

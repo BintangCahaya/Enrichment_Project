@@ -6,6 +6,7 @@ import { CustomButton } from '@/components/customBtn';
 import CustomPopup from '@/components/customPopup';
 import AddRoomModal from '@/components/addRoomModal';
 import EditTenantModal from '@/components/editTenantModal';
+import { Icon } from 'react-native-paper';
 
 export default function TenantDetails() {
   const { id, name, room, status} = useLocalSearchParams<{
@@ -19,16 +20,18 @@ export default function TenantDetails() {
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
-        <Ionicons size={80} name="people-circle-outline" color={'#000000'}/>
+        <Ionicons size={100} name="people-circle-outline" color={'#000000'}/>
         <View>
-            <Text>Nama</Text>
-            <Text>Male / Female</Text>
-            <Text>Contact Number</Text>
+            <Text style={[styles.globalText, {fontSize: 20}]}>Nama</Text>
+            <Text style={styles.globalText}>Male / Female</Text>
+            <Text style={styles.globalText}>Contact Number</Text>
         </View>
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.roomInfo}>
-          <Ionicons size={40} name="key" color={'#55C595'}/>
+          <View style={{transform: [{rotate: '45deg'}]}}>
+            <Icon size={40} source="key-variant" color={'#55C595'}/>
+          </View>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <Text>Room</Text>
             <Text>001</Text>
@@ -36,24 +39,24 @@ export default function TenantDetails() {
         </View>
         <View style={styles.contractInfo}>
           <View style={styles.contractInfoHeader}>
-            <Text>November 2025</Text>
+            <Text style={[styles.globalText, {color: '#55C595'}]}>November 2025</Text>
             <Text style={styles.status}>Lunas</Text>
           </View>
-          <Text style={{fontSize: 12}}>Kontrak: November - Desember 2025</Text>
+          <Text style={styles.globalText}>Kontrak: November - Desember 2025</Text>
         </View>
       </View>
-      <CustomButton title='Edit' style={{width: '20%', alignSelf: 'flex-end', borderRadius: 15}} onPress={() => setShowPopup(true)}/>
-      <CustomPopup style={{width: '90%', height: '75%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
+      <CustomButton title='Edit' style={{width: '25%', alignSelf: 'flex-end', borderRadius: 15}} onPress={() => setShowPopup(true)}/>
+      <CustomPopup style={{height: '75%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
           <EditTenantModal onClose={() => setShowPopup(false)}/>
       </CustomPopup>
-      <View style={styles.historyContainer}>
-        <Text>Riwayat Transaksi</Text>
+      <View>
+        <Text style={[styles.globalText, {fontSize: 20, color: '#000000'}]}>Riwayat Transaksi</Text>
         <View style={styles.historyCard}>
           <View style={styles.transactionInfo}>
-            <Text style={{fontSize: 24, fontWeight: "400"}}>Rp 2.000.000,-</Text>
-            <Text>10 Oktober 2025</Text>
+            <Text style={[styles.globalText, {fontSize: 24, color: '#000000'}]}>Rp 2.000.000,-</Text>
+            <Text style={styles.globalText}>10 Oktober 2025</Text>
           </View>
-          <CustomButton title='Receipt' style={{width: '25%', height: 45}} onPress={() => alert("button clicked")}/>
+          <CustomButton title='Receipt' style={{width: '25%', height: 38, borderRadius: 30}} onPress={() => alert("button clicked")}/>
         </View>
       </View>
     </View>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.6,
     padding: 10,
-    justifyContent: 'space-between',
+    gap: 15,
     backgroundColor: '#fff',
     elevation: 6
   },
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   status:{
-    backgroundColor: '#55C595',
+    backgroundColor: '#0FB800',
     padding: 3,
     paddingHorizontal: 10,
     borderRadius: 20,
@@ -110,16 +113,22 @@ const styles = StyleSheet.create({
   },
   historyCard: {
     borderColor: '#000000',
-    borderWidth: 0.8,
+    borderWidth: 0.6,
     marginVertical: 10,
     padding: 10,
     borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#fff',
     elevation: 6
   },
   transactionInfo:{
     padding: 10
+  },
+  globalText: {
+    fontFamily: 'LeagueSpartan_400Regular',
+    color: '#8d8d8d',
+    fontSize: 14
   }
 });

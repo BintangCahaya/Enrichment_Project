@@ -3,6 +3,7 @@ import { Tabs } from "expo-router";
 import { BackHandler } from "react-native";
 
 export default function TabsLayout() {
+  
   return (
     <Tabs screenOptions={{ 
       tabBarActiveTintColor: '#55C595', 
@@ -14,7 +15,8 @@ export default function TabsLayout() {
         options={{
           title: 'Dashboard',
           headerShown: true,
-          headerStyle: {backgroundColor: '#55C595'},
+          headerStyle: {backgroundColor: '#55C595',},
+          headerTitleStyle: {fontFamily: 'LeagueSpartan_700Bold', fontSize: 24, fontWeight: 'bold', },
           headerTintColor: '#fff',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="home" color={color} />,
         }}

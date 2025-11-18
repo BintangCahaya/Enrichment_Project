@@ -23,10 +23,10 @@ export default function TenantCard({tenant} : TenantCardProps){
                 <View>
                     <Text style={styles.name}>{name}</Text>
                     <Text style={styles.room}>{room}</Text>
-                    <Text style={{color: status === 'Aktif' ? 'green' : 'red'}}>{status}</Text>
+                    <Text style={{fontFamily: 'LeagueSpartan_400Regular', color: status === 'Lunas' ? '#0FB800' : 'red'}}>{status}</Text>
                 </View>
             </View>
-            <CustomButton title="Details" style={{width: 80}} onPress={() => router.push(`/(tabs)/tenants/${id}`)}/>
+            <CustomButton title="Details" style={{width: 90, borderRadius: 18}} onPress={() => router.push(`/(tabs)/tenants/${id}`)}/>
         </View>
     );
 }
@@ -53,12 +53,13 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 18,
-        fontFamily: 'league spartan',
+        fontFamily: 'LeagueSpartan_700Bold',
         fontWeight: 'bold',
-        color: '#787878'
+        color: '#8d8d8d'
     },
     room: {
-        color: '#b4b4b4'
+        color: '#8d8d8d',
+        fontFamily: 'LeagueSpartan_400Regular',
     },
     status: {
 
