@@ -1,12 +1,22 @@
 {
   "name": "enrichment_project_backend",
   "version": "1.0.0",
-  "description": "Backend API for the Enrichment Project",
+  "description": "Backend API for the Enrichment Project — includes APIs for Users, Kos, and Rooms with Jest testing, CI/CD, and Windows compatibility.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest --runInBand --coverage"
+    "dev": "nodemon server.js",
+    "test": "cross-env NODE_ENV=test jest --runInBand --coverage"
   },
+  "keywords": [
+    "express",
+    "sqlite",
+    "jest",
+    "api",
+    "backend",
+    "nodejs",
+    "supertest"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -14,10 +24,23 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^30.2.0",
+    "nodemon": "^3.1.0",
     "supertest": "^7.1.4"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ],
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "server.js",
+      "routes/**/*.js"
+    ]
   }
 }
