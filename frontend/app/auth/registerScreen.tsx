@@ -10,6 +10,7 @@ export default function RegisterScreen(){
     const [password, setPassword] = useState('');
     const [conPassword, setConPassword] = useState('');
     const [hidden, setHidden] = useState(true);
+    const [conHidden, setConHidden] = useState(true);
 
     const handleRegister = () => {
         if(username.length >= 8){
@@ -85,14 +86,14 @@ export default function RegisterScreen(){
                     style={styles.input} 
                     placeholder="Confirm Password"
                     placeholderTextColor={'#8d8d8d'}
-                    secureTextEntry={hidden}
+                    secureTextEntry={conHidden}
                     value={conPassword}
                     onChangeText={setConPassword}
                     mode="outlined"
-                    outlineColor="#ccc"
+                    outlineColor="#8d8d8d"
                     activeOutlineColor="#55C595"
                     left={<TextInput.Icon icon="lock" color={'#8d8d8d'} />}
-                    right={<TextInput.Icon icon={hidden ? "eye-closed" : "eye"} onPress={() => setHidden(!hidden)}/>}
+                    right={<TextInput.Icon icon={conHidden ? "eye-closed" : "eye"} onPress={() => setConHidden(!conHidden)}/>}
                     theme={{
                         roundness: 30,
                         colors: {
@@ -100,10 +101,10 @@ export default function RegisterScreen(){
                         },
                     }}
                 />
-                <CustomButton title="REGISTER" style={{width: '80%'}} onPress={handleRegister}/>
+                <CustomButton title="REGISTER" buttonStyle={{width: '80%'}} onPress={handleRegister}/>
                 <View style={styles.divider}/>
                 <Text style={styles.miniText}>Already have an account?</Text>
-                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={() => router.navigate('/auth')}/>
+                <CustomButton title="LOGIN" buttonStyle={{width: '80%'}} onPress={() => router.navigate('/auth')}/>
             </View>
         </View>
     );

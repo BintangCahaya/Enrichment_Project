@@ -2,11 +2,14 @@ import { CustomButton } from "@/components/customBtn";
 import TransactionCard from "@/components/transactionCard";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import { LineChart } from 'react-native-chart-kit';
 
 export default function FinanceScreen(){
     const [profit, setProfit] = useState('Rp. 18.000.000,-');
+    const types = ['Income', 'Expense'];
+    const [typeActive, setTypeActive] = useState('Income');
+
     const transaksi = [
         {
             id: '1',
@@ -55,46 +58,46 @@ const chartConfig = {
 };
 
     return(
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.header}>
-                <Text>Total Profit</Text>
-                <Text>{profit}</Text>
+                <Text style={styles.globalText}>Total Profit</Text>
+                <Text style={[styles.globalText, {color: '#000000', fontSize: 30, fontFamily: 'LeagueSpartan_500Medium'}]}>{profit}</Text>
             </View>
             <View style={styles.graphHeader}>
                 <Text>Bulan ini</Text>
                 <View style={styles.btnContainer}>
-                    <CustomButton title="Income" style={{width: '40%'}} onPress={() => alert('Button clicked')}/>
-                    <CustomButton title="Expense" style={{width: '40%', backgroundColor: '#000000'}} onPress={() => alert('Button clicked')}/> 
+                    {types.map((item) => (
+                        <CustomButton title={item} buttonStyle={{backgroundColor: typeActive === item ? '#55C595' : '#8d8d8d', width: '40%', borderRadius: 30, padding: 5}} textStyle={{fontSize: 15}} onPress={() => setTypeActive(item)}/>
+                    ))}
                 </View>
             </View>
             <View>
-                <Text>Ini Grafik</Text>
                 <LineChart
-        data={data}
-        width={screenWidth - 40}
-        height={250}
-        yAxisLabel="Rp "
-        yAxisSuffix=""
-        yAxisInterval={1}
-        chartConfig={chartConfig}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
-      />
+                    data={data}
+                    width={screenWidth - 40}
+                    height={250}
+                    yAxisLabel="Rp "
+                    yAxisSuffix=""
+                    yAxisInterval={1}
+                    chartConfig={chartConfig}
+                    bezier
+                    style={{
+                    marginVertical: 8,
+                    borderRadius: 16,
+                    }}
+                />
             </View>
-            <CustomButton title="RP. 2.800.000,-" style={{alignSelf: 'flex-end'}} onPress={() => alert('Button clicked')}/>
+            <CustomButton title="RP. 2.800.000,-" buttonStyle={{alignSelf: 'flex-end'}} textStyle={{fontSize: 15}} onPress={() => alert('Button clicked')}/>
             <View style={styles.transactionheader}>
-                <Text>Daftar Transaksi</Text>
-                <CustomButton title="See more" style={{width: '40%', borderRadius: 50, alignSelf: 'flex-end'}} onPress={() => router.push('/(tabs)/finances/transaction')}/>
+                <Text style={[styles.globalText, {fontWeight: '700'}]}>Daftar Transaksi</Text>
+                <CustomButton title="See more" buttonStyle={{width: '25%', borderRadius: 30, alignSelf: 'flex-end', padding: 5}} textStyle={{fontSize: 15}} onPress={() => router.push('/(tabs)/finances/transaction')}/>
             </View>
             <FlatList
                 data={transaksi}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <TransactionCard transaction={item} />}
             />
-        </View>
+        </ScrollView>
     );
 }
 
@@ -115,9 +118,8 @@ const styles = StyleSheet.create({
     btnContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
+        gap: 15,
         justifyContent: 'flex-end',
-        marginRight: 10
     },
     transactionheader: {
         marginTop: 10,
@@ -128,5 +130,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-
+    globalText: {
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#8d8d8d',
+        fontSize: 22
+    }
 });

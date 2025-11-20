@@ -70,7 +70,7 @@ export default function TransactionScreen(){
                 renderItem={({ item }) => <TransactionCard transaction={item} />}
             />
             <View style={{position: 'absolute', bottom: 20, right: 20}}>
-                <CustomButton title="+" style={{borderRadius: 200}} onPress={() => setModalVisible(true)}/>
+                <CustomButton title="+" buttonStyle={{width: 75, height: 75, borderRadius: 50}} textStyle={{fontSize: 40}} onPress={() => setModalVisible(true)}/>
             </View>
             <CustomPopup style={{width: '90%', height: '75%'}} visible={isModalVisible} onClose={() => setModalVisible(false)}>
                 <AddTransactionModal onClose={() => setModalVisible(false)}/>
@@ -88,9 +88,12 @@ const styles = StyleSheet.create({
     search: {
         width: '100%',
         borderRadius: 30,
-        borderWidth: 0.6,
+        borderWidth: 0.8,
         borderColor: '#000000',
-        paddingLeft: 30
+        paddingLeft: 30,
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#8d8d8d',
+        fontSize: 18
     },
     filterContainer: {
         flexDirection: 'row',
@@ -103,9 +106,11 @@ const styles = StyleSheet.create({
     filterText: {
         flex: 1, 
         padding: 5,
+        fontFamily: 'LeagueSpartan_400Regular',
     },
     filterTextFocus: {
         borderBottomWidth: 1,
-        borderBottomColor: '#55C595'
+        borderBottomColor: '#55C595',
+        fontFamily: 'LeagueSpartan_400Regular',
     }
 });

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { CustomButton } from "./customBtn";
 import { router } from "expo-router";
 import PopupHeader from "./popupHeader";
+import { Icon } from "react-native-paper";
 
 export default function ViewTenantModal({ onClose }: { onClose: () => void }){
     return(
@@ -10,32 +11,34 @@ export default function ViewTenantModal({ onClose }: { onClose: () => void }){
             <PopupHeader title="View Tenant"/>
             <View style={{padding: 10}}>
                 <View style={styles.profileContainer}>
-                    <Ionicons size={80} name="people-circle-outline" color={'#000000'}/>
+                    <Ionicons size={100} name="people-circle-outline" color={'#000000'}/>
                     <View>
-                        <Text>Nama</Text>
-                        <Text>Male / Female</Text>
-                        <Text>Contact Number</Text>
+                        <Text style={[styles.globalText, {fontSize: 20}]}>Nama</Text>
+                        <Text style={styles.globalText}>Male / Female</Text>
+                        <Text style={styles.globalText}>Contact Number</Text>
                     </View>
                 </View>
                 <View style={styles.infoContainer}>
                     <View style={styles.roomInfo}>
-                    <Ionicons size={40} name="key" color={'#55C595'}/>
+                    <View style={{transform: [{rotate: '45deg'}]}}>
+                        <Icon size={40} source="key-variant" color={'#55C595'}/>
+                    </View>
                     <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                        <Text>Room</Text>
-                        <Text>001</Text>
+                        <Text style={[styles.globalText, {color: '#55C595', marginBottom: 5}]}>Room</Text>
+                        <Text style={[styles.globalText, {color: '#55C595', fontSize: 32, lineHeight: 30}]}>001</Text>
                     </View>
                     </View>
                     <View style={styles.contractInfo}>
                     <View style={styles.contractInfoHeader}>
-                        <Text>November 2025</Text>
+                        <Text style={[styles.globalText, {color: '#55C595'}]}>November 2025</Text>
                         <Text style={styles.status}>Lunas</Text>
                     </View>
-                    <Text style={{fontSize: 12}}>Kontrak: November - Desember 2025</Text>
+                    <Text style={styles.globalText}>Kontrak: November - Desember 2025</Text>
                     </View>
                 </View>
-                <View style={{alignItems: 'flex-end'}}>
-                    <CustomButton title="Go to details" style={{width: '45%'}} onPress={() => router.navigate('/(tabs)/tenants')}/>
-                </View>
+            </View>
+            <View style={styles.bottom}>
+                <CustomButton title="Go to details" buttonStyle={{width: '45%'}} onPress={() => router.navigate('/(tabs)/tenants')}/>
             </View>
         </View>
     );
@@ -54,20 +57,21 @@ const styles = StyleSheet.create({
     },
     infoContainer:{
         flexDirection: 'row',
-        borderColor: "#000000",
+        borderColor: "#8d8d8d",
         borderRadius: 10,
-        borderWidth: 0.6,
+        borderWidth: 1,
         padding: 10,
-        justifyContent: 'space-between',
+        gap: 15,
         backgroundColor: '#fff',
         elevation: 6
     },
     roomInfo:{
         flexDirection: 'row',
         gap: 10,
-        borderRightColor: '#000000',
-        borderRightWidth: 0.8,
-        paddingRight: 10
+        borderRightColor: '#8d8d8d',
+        borderRightWidth: 1,
+        paddingRight: 10,
+        alignItems: 'center'
     },
     contractInfo: {
         gap: 5,
@@ -79,10 +83,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     status:{
-        backgroundColor: '#55C595',
+        backgroundColor: '#0FB800',
         padding: 3,
         paddingHorizontal: 10,
         borderRadius: 20,
         color: '#fff'
     },
+    bottom: {
+        alignItems: 'flex-end',
+        padding: 10
+    },
+    globalText: {
+        fontFamily: 'LeagueSpartan_400Regular', 
+        fontSize: 14,
+        color: '#8d8d8d'
+    }
 });

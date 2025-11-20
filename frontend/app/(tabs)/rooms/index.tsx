@@ -1,4 +1,6 @@
+import AddRoomModal from "@/components/addRoomModal";
 import { CustomButton } from "@/components/customBtn";
+import CustomPopup from "@/components/customPopup";
 import RoomCard from "@/components/roomCard";
 import RoomDetailModal from "@/components/roomDetailModal";
 import { useState } from "react";
@@ -13,7 +15,8 @@ interface Room {
 export default function RoomScreen(){
     const [room, setRoom] = useState<Room[]>([]);
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isDetailVisible, setDetailVisible] = useState(false);
+    const [isAddVisible, setAddVisible] = useState(false);
     
     const handleAddRoom = () => {
         setRoom([
@@ -29,7 +32,7 @@ export default function RoomScreen(){
 
     const handleCardPress = (room: Room) => {
         setSelectedRoom(room);
-        setModalVisible(true);
+        setDetailVisible(true);
     };
 
     return(
@@ -37,13 +40,13 @@ export default function RoomScreen(){
             {room.length === 0 ? (
                 <View style={styles.emptyContainer}>
                     <Text style= {{fontFamily: 'LeagueSpartan_400Regular', color: '#8d8d8d', fontSize: 16}}>You don't have any room</Text>
-                    <CustomButton title="ADD ROOM" style={{width: '40%'}} onPress={handleAddRoom} />
+                    <CustomButton title="ADD ROOM" buttonStyle={{width: '40%'}} onPress={handleAddRoom} />
                 </View>
             ) : (
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
                         <View style={styles.infoContainer}>
-                            <View style={styles.infoDetailContainer}>
+                            <View style={[styles.infoDetailContainer, {paddingHorizontal: 40}]}>
                                 <Text style={styles.terisiHeader}>Terisi</Text>
                                 <Text style={styles.terisi}>{room.filter((r) => r.status === "terisi").length}</Text>
                             </View>
@@ -53,12 +56,12 @@ export default function RoomScreen(){
                                 <Text style={styles.kosong}>{room.filter((r) => r.status === "kosong").length}</Text>
                             </View>              
                         </View>
-                        <View style={{alignItems: 'center', width: '35%'}}>
+                        <View style={{alignItems: 'center', width: '33%'}}>
                             <View style={styles.totalContainer}>
                                 <Text style={[styles.total]}>{room.length}</Text>
                                 <Text style={[styles.total, {fontSize: 20, color: '#8d8d8d'}]}>Kamar</Text>
                             </View>
-                            <CustomButton title="Kamar" style={{width: '90%', borderRadius: 10}} onPress={() => alert('Button clicked')} />
+                            <CustomButton title="+ Kamar" buttonStyle={{width: '75%', borderRadius: 10}} onPress={() => setAddVisible(true)} />
                         </View>
                     </View>
                     <View style={styles.roomList}>
@@ -70,10 +73,13 @@ export default function RoomScreen(){
                         />
                     </View>
                     <RoomDetailModal
-                        visible={isModalVisible}
-                        onClose={() => setModalVisible(false)}
+                        visible={isDetailVisible}
+                        onClose={() => setDetailVisible(false)}
                         room={selectedRoom}
                     />
+                    <CustomPopup style={{height: '85%'}} visible={isAddVisible} onClose={() => setAddVisible(false)}>
+                        <AddRoomModal onClose={() => setAddVisible(false)}/>
+                    </CustomPopup>
                 </View>
             )}
         </>
@@ -94,13 +100,13 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flexDirection: 'row',
-        gap: 20,
+        gap: 15,
         marginBottom: 10
     },
     infoContainer: {
-        borderColor: '#000000',
+        borderColor: '#8d8d8d',
         backgroundColor: '#fff',
-        borderWidth: 0.8,
+        borderWidth: 1,
         borderRadius: 12,
         flexDirection: 'row',
         elevation: 8, // Android
@@ -115,8 +121,8 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     divider: {
-        borderColor: '#000A00',
-        borderWidth: 0.2,
+        borderColor: '#8d8d8d',
+        borderWidth: 0.7,
         height: '80%',
         alignSelf: 'center'
     },
@@ -149,11 +155,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        borderColor: '#000000',
+        borderColor: '#8d8d8d',
         backgroundColor: '#fff',
-        borderWidth: 0.7,
+        borderWidth: 1,
         padding: 10,
-        gap: 15,
+        gap: 10,
         width: '100%',
         elevation: 8, // Android
         shadowColor: '#000', // iOS
@@ -165,8 +171,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         lineHeight: 22,
         color: '#55C595',
-        fontFamily: 'LeagueSpartan_400Regular',
-
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     roomList: {
         justifyContent: 'center',

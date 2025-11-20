@@ -77,7 +77,7 @@ export default function CreateKosScreen(){
                 </DropDown>
                 <View style={styles.divider}/>
                 <View style={{alignItems: 'flex-end'}}>
-                    <CustomButton title="Add Room" style={{width: '40%'}} onPress={() => setShowPopup(true)}/>
+                    <CustomButton title="Add Room" buttonStyle={{width: '30%', borderRadius: 30}} textStyle={{fontSize: 15}} onPress={() => setShowPopup(true)}/>
                 </View>
                 <CustomPopup style={{height: '80%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
                     <AddRoomModal onClose={() => setShowPopup(false)}/>
@@ -89,7 +89,7 @@ export default function CreateKosScreen(){
             </ScrollView>
             <SafeAreaView style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Submit" style={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(tabs)')}/>
+                <CustomButton title="Submit" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(tabs)')}/>
             </SafeAreaView>
         </View>
     );
@@ -109,13 +109,14 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         borderRadius: 10,
-        borderColor: '#ccc',
-        borderWidth: 1
+        borderColor: '#8d8d8d',
+        borderWidth: 1,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     divider: {
         borderWidth: 0.5,
         width: '100%',
-        borderColor: '#ccc',
+        borderColor: '#8d8d8d',
         marginTop: 20
     },
     roomInfoContainer: {

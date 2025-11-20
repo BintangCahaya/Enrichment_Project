@@ -2,13 +2,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Text, View } from "react-native";
 import { CustomButton } from "./customBtn";
 import { router } from "expo-router";
-
-interface Tenant {
-  id: string | number;
-  name: string;
-  room: string;
-  status: string;
-}
+import { Tenant } from "@/types/Tenant";
 
 interface TenantCardProps {
   tenant: Tenant;
@@ -26,7 +20,7 @@ export default function TenantCard({tenant} : TenantCardProps){
                     <Text style={{fontFamily: 'LeagueSpartan_400Regular', color: status === 'Lunas' ? '#0FB800' : 'red'}}>{status}</Text>
                 </View>
             </View>
-            <CustomButton title="Details" style={{width: 90, borderRadius: 18}} onPress={() => router.push(`/(tabs)/tenants/${id}`)}/>
+            <CustomButton title="Details" buttonStyle={{width: '30%', borderRadius: 18}} onPress={() => router.push(`/(tabs)/tenants/${id}`)}/>
         </View>
     );
 }
@@ -37,8 +31,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 20,
-        borderColor: '#000000',
-        borderWidth: 0.4,
+        borderColor: '#8d8d8d',
+        borderWidth: 0.7,
         width: '100%',
         marginVertical: 10,
         paddingVertical: 15,

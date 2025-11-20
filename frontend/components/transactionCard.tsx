@@ -18,11 +18,11 @@ export default function TransactionCard({transaction} : TransactionCardProps){
     return(
         <View style={styles.container}>
             <View>
-                <Text>{deskripsi}</Text>
-                <Text>{tanggal}</Text>
+                <Text style={styles.globalText}>{deskripsi}</Text>
+                <Text style={[styles.globalText, {fontSize: 12, color: '#8d8d8dd'}]}>{tanggal}</Text>
             </View>
             <View>
-                <Text style={tipe == 'income' ? styles.income : styles.expense}>
+                <Text style={[styles.globalText, tipe == 'income' ? styles.income : styles.expense, {fontSize: 18}]}>
                     {tipe == 'income' ? `+ Rp ${jumlah}`: `- Rp ${jumlah}`}
                 </Text>
             </View>
@@ -42,9 +42,14 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     income: {
-        color: 'green'
+        color: '#0FB800'
     },
     expense: {
-        color: 'red'
+        color: '#B80F00'
     },
+    globalText: {
+        fontFamily: 'LeagueSpartan_400Regular',
+        color: '#000000',
+        fontSize: 15
+    }
 });

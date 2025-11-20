@@ -80,13 +80,13 @@ export default function LoginScreen(){
                     }}
                 />
                 {error ? <Text style={styles.error}>{error}</Text> : null}
-                <CustomButton title="LOGIN" style={{width: '80%'}} onPress={handleLogin}/>
+                <CustomButton title="LOGIN" buttonStyle={{width: '80%'}} onPress={handleLogin}/>
                 <Link href='/auth/registerScreen' style={styles.miniText}>Forgot Password?</Link>
                 <View style={styles.divider}/>
                 <Text style={styles.miniText}>Don't have an account?</Text>
-                <CustomButton title="REGISTER" style={{width: '80%'}} onPress={() => router.navigate('/auth/registerScreen')}/>
+                <CustomButton title="REGISTER" buttonStyle={{width: '80%'}} onPress={() => router.navigate('/auth/registerScreen')}/>
                 <Text style={styles.orText}>Or</Text>
-                <CustomButton title="Sign In With Google" style={{width: '80%'}} onPress={handleLogin} icon={googleIcon}/>
+                <CustomButton title="Sign In With Google" buttonStyle={{width: '80%'}} onPress={handleLogin} icon={googleIcon}/>
             </View>
         </View>
     );

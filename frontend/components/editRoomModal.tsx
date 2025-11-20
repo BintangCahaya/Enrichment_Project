@@ -66,7 +66,7 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
                         value={waktu}
                         onChangeText={setWaktu}
                     />
-                    <CustomButton title="+" style={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
+                    <CustomButton title="+" buttonStyle={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
                 </View>
                 <TextInput
                     style={styles.input}
@@ -90,11 +90,11 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
                     textAlignVertical="top"
                 />
                 <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove Room" style={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
+                    <CustomButton title="Remove Room" buttonStyle={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
+                <CustomButton title="Save" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
             </View>
         </SafeAreaView>
     );
@@ -113,8 +113,9 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 5,
         borderRadius: 10,
-        borderColor: '#ccc',
-        borderWidth: 1
+        borderColor: '#8d8d8d',
+        borderWidth: 1,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     detailContainer: {
         flexDirection: 'row',
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     },
     description: {
         borderWidth: 1,
-        borderColor: "#ccc",
+        borderColor: "#8d8d8d",
         borderRadius: 8,
         height: 120,
         textAlignVertical: "top",
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        borderWidth: 0.5,
-        borderColor: '#ccc',
+        borderWidth: 0.7,
+        borderColor: '#8d8d8d',
     },
 });

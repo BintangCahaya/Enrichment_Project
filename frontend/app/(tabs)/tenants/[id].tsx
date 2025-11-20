@@ -33,8 +33,8 @@ export default function TenantDetails() {
             <Icon size={40} source="key-variant" color={'#55C595'}/>
           </View>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Room</Text>
-            <Text>001</Text>
+            <Text style={[styles.globalText, {color: '#55C595', marginBottom: 5}]}>Room</Text>
+            <Text style={[styles.globalText, {color: '#55C595', fontSize: 32, lineHeight: 30}]}>001</Text>
           </View>
         </View>
         <View style={styles.contractInfo}>
@@ -45,7 +45,7 @@ export default function TenantDetails() {
           <Text style={styles.globalText}>Kontrak: November - Desember 2025</Text>
         </View>
       </View>
-      <CustomButton title='Edit' style={{width: '25%', alignSelf: 'flex-end', borderRadius: 15}} onPress={() => setShowPopup(true)}/>
+      <CustomButton title='Edit' buttonStyle={{width: '25%', alignSelf: 'flex-end', borderRadius: 15}} onPress={() => setShowPopup(true)}/>
       <CustomPopup style={{height: '75%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
           <EditTenantModal onClose={() => setShowPopup(false)}/>
       </CustomPopup>
@@ -56,7 +56,7 @@ export default function TenantDetails() {
             <Text style={[styles.globalText, {fontSize: 24, color: '#000000'}]}>Rp 2.000.000,-</Text>
             <Text style={styles.globalText}>10 Oktober 2025</Text>
           </View>
-          <CustomButton title='Receipt' style={{width: '25%', height: 38, borderRadius: 30}} onPress={() => alert("button clicked")}/>
+          <CustomButton title='Receipt' buttonStyle={{width: '25%', height: 38, borderRadius: 30}} onPress={() => alert("button clicked")}/>
         </View>
       </View>
     </View>
@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
   },
   infoContainer:{
     flexDirection: 'row',
-    borderColor: "#000000",
+    borderColor: "#8d8d8d",
     borderRadius: 10,
-    borderWidth: 0.6,
+    borderWidth: 1,
     padding: 10,
     gap: 15,
     backgroundColor: '#fff',
@@ -88,9 +88,10 @@ const styles = StyleSheet.create({
   roomInfo:{
     flexDirection: 'row',
     gap: 10,
-    borderRightColor: '#000000',
-    borderRightWidth: 0.8,
-    paddingRight: 10
+    borderRightColor: '#8d8d8d',
+    borderRightWidth: 1,
+    paddingRight: 10,
+    alignItems: 'center'
   },
   contractInfo: {
     gap: 5,
@@ -108,12 +109,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     color: '#fff'
   },
-  historyContainer: {
-
-  },
   historyCard: {
-    borderColor: '#000000',
-    borderWidth: 0.6,
+    borderColor: '#8d8d8d',
+    borderWidth: 0.7,
     marginVertical: 10,
     padding: 10,
     borderRadius: 20,

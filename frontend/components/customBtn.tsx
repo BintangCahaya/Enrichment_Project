@@ -1,21 +1,22 @@
 import React from "react";
-import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TouchableHighlight, TouchableOpacity, ViewStyle } from "react-native";
+import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface CustomButtonProps {
   title: string;
   onPress: () => void;
-  style?: StyleProp<ViewStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   icon?: ImageSourcePropType;
 }
 
-export function CustomButton({title, style, onPress, icon}: CustomButtonProps){
+export function CustomButton({title, buttonStyle, textStyle, onPress, icon}: CustomButtonProps){
     return(
-        <TouchableOpacity style={[styles.btn, style]} onPress={onPress}>
+        <TouchableOpacity style={[styles.btn, buttonStyle]} onPress={onPress}>
             {icon && (
                 <Image source={icon} style={styles.iconLeft}/>
             )}
-            <Text style={styles.btnText}>{title}</Text>
+            <Text style={[styles.btnText, textStyle]}>{title}</Text>
         </TouchableOpacity>
     );
 }

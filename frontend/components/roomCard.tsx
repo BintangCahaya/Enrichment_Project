@@ -1,23 +1,14 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-
-interface Room {
-    id: number | string;
-    roomNumber: number | string;
-    status: string;
-}
-
-interface RoomCardProps {
-  room: Room;
-}
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function RoomCard({room, onPress} : any){
     const {id, roomNumber, status} = room;
+    const bedIcon = require('@/assets/images/bed.png');
 
     return(
         <Pressable style={styles.container} onPress={() => onPress(room)}>
-            <Ionicons size={40} name="bed-outline" color={status === 'kosong' ? '#8D8D8D' : '#55C595'}/>
-            <Text style={{fontFamily: 'LeagueSpartan_400Regular', fontSize: 22, fontWeight: '700', color: status === 'kosong' ? '#8D8D8D' : '#55C595'}}>{roomNumber}</Text>
+            <Image source={bedIcon} style={{tintColor: status === 'kosong' ? '#8D8D8D' : '#55C595', height: 40, width: 40}}/>
+            <Text style={[styles.roomNumber, {color: status === 'kosong' ? '#8D8D8D' : '#55C595'}]}>{roomNumber}</Text>
         </Pressable>
     );
 }
@@ -25,12 +16,13 @@ export default function RoomCard({room, onPress} : any){
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 0.8,
-        gap: 2,
+        borderColor: '#8d8d8d',
+        gap: 10,
         margin: 10,
-        padding: 5,
+        padding: 10,
         borderRadius: 10,
         width: 100,
         backgroundColor: '#fff',
@@ -40,5 +32,11 @@ const styles = StyleSheet.create({
         shadowRadius: 3.5,
         shadowOffset: { width: 0, height: 2 },
     },
-
+    roomNumber: {
+        fontFamily: 'LeagueSpartan_400Regular', 
+        fontSize: 22, 
+        lineHeight: 18, 
+        textAlign: 'center', 
+        marginTop: 5
+    }
 });

@@ -1,9 +1,12 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen(){
+
+    const bedIcon = require('@/assets/images/bed.png');
+
     return(
         <View style={styles.container}>
             <View style={styles.kosContainer}>
@@ -21,7 +24,7 @@ export default function HomeScreen(){
                     <Text style={styles.roomInfoDetail}>9/16</Text>
                 </View>
                 <View style={{alignSelf: 'center', marginRight: 20}}>
-                    <Icon source="bed-king" color="#fff" size={100}/>
+                    <Image source={bedIcon} tintColor="#fff" style={{height: 100, width: 100}}/>
                 </View>
             </View>
             <View style={styles.statusContainer}>

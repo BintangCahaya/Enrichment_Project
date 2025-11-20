@@ -77,11 +77,11 @@ export default function EditTenantModal({ onClose }: { onClose: () => void }){
                     onChangeText={setTanggal}
                 />
                 <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove tenant" style={{backgroundColor: 'red', width: '80%', marginTop: 15}} onPress={() => alert('Tenant removed')}/>
+                    <CustomButton title="Remove tenant" buttonStyle={{backgroundColor: 'red', width: '80%', marginTop: 15}} onPress={() => alert('Tenant removed')}/>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
+                <CustomButton title="Save" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
             </View>
         </SafeAreaView>
     );
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 5,
         borderRadius: 10,
-        borderColor: '#ccc',
+        borderColor: '#8d8d8d',
         borderWidth: 1,
         fontFamily: 'LeagueSpartan_400Regular'
     },

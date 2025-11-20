@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
 import { useState } from "react";
@@ -12,6 +12,9 @@ import { Ionicons } from "@expo/vector-icons";
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 export default function AssignTenantModal({ onClose, room }: any){
+
+    const bedIcon = require('@/assets/images/bed.png');
+
     const [nama, setNama] = useState('');
     const [jenisKelamin, setJenisKelamin] = useState('');
     const [noTelpon, setNoTelpon] = useState('');
@@ -42,9 +45,9 @@ export default function AssignTenantModal({ onClose, room }: any){
                     <Pressable onPress={pickImageAsync}>
                         <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
                     </Pressable>
-                    <View style={[styles.roomNumber, {backgroundColor: room.status == 'kosong' ? '#8d8d8d' : '#55C595'}]}>
-                        <Ionicons name="bed-outline" size={40} color='#fff'/>
-                        <Text style={{fontSize: 20, color: '#fff'}}>{room.roomNumber}</Text>
+                    <View style={[styles.roomNumber, {backgroundColor: '#8d8d8d'}]}>
+                        <Image source={bedIcon} tintColor='#fff'/>
+                        <Text style={{fontFamily: 'LeagueSpartan_400Regular', fontSize: 22, color: '#fff'}}>{room.roomNumber}</Text>
                     </View>
                 </View>
                 
@@ -86,7 +89,7 @@ export default function AssignTenantModal({ onClose, room }: any){
                 />
             </View>
             <View style={styles.bottomContainer}>
-                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
+                <CustomButton title="Save" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
             </View>
         </SafeAreaView>
     );
@@ -110,8 +113,9 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 5,
         borderRadius: 10,
-        borderColor: '#ccc',
-        borderWidth: 1
+        borderColor: '#8d8d8d',
+        borderWidth: 1,
+        fontFamily: 'LeagueSpartan_400Regular'
     },
     detailContainer: {
         flexDirection: 'row',
@@ -131,18 +135,17 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        borderWidth: 0.5,
-        borderColor: '#ccc',
+        borderWidth: 0.7,
+        borderColor: '#8d8d8d',
     },
     roomNumber: {
         flexDirection: 'row',
-        padding: 10,
+        padding: 12,
         backgroundColor: '#8d8d8d',
-        gap: 5,
+        gap: 10,
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 10,
-        height: 60,
         alignSelf: 'flex-end'
     },
 });

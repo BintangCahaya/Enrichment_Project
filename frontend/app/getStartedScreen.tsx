@@ -12,7 +12,7 @@ export default function GetStartedScreen(){
                 <Text style={styles.title}>NOW</Text>
             </View>
             
-            <CustomButton title="GET STARTED" style={{width: '40%'}} onPress={() => router.navigate('/createKosScreen')}/>
+            <CustomButton title="GET STARTED" buttonStyle={{width: '40%'}} onPress={() => router.navigate('/createKosScreen')}/>
         </View>
     );
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { CustomButton } from "@/components/customBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import PopupHeader from "./popupHeader";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -35,6 +36,7 @@ export default function AddRoomModal({ onClose }: { onClose: () => void }){
 
     return(
         <SafeAreaView style={styles.container}>
+            <PopupHeader title="Add Room"/>
             <View style={styles.formContainer}>
                 <Pressable onPress={pickImageAsync}>
                     <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
@@ -64,7 +66,7 @@ export default function AddRoomModal({ onClose }: { onClose: () => void }){
                         value={waktu}
                         onChangeText={setWaktu}
                     />
-                    <CustomButton title="+" style={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
+                    <CustomButton title="+" buttonStyle={{width: '15%', borderRadius: 10}} onPress={() => alert('Button clicked')}/>
                 </View>
                 <TextInput
                     style={styles.input}
@@ -90,7 +92,7 @@ export default function AddRoomModal({ onClose }: { onClose: () => void }){
             </View>
             <View style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Save" style={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
+                <CustomButton title="Save" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => onClose()}/>
             </View>
         </SafeAreaView>
     )
