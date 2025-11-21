@@ -1,17 +1,15 @@
-import { CustomButton } from "@/components/customBtn";
-import { router } from "expo-router";
 import { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ScrollView, Pressable, TextInput, StyleSheet } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
-import CustomPopup from "@/components/customPopup";
-import AddRoomModal from "@/components/addRoomModal";
 import DropDown from "@/components/dropDown";
+import { CustomButton } from "@/components/customBtn";
+import AddRoomModal from "@/components/addRoomModal";
+import CustomPopup from "@/components/customPopup";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
-const PlaceholderImage = require('@/assets/images/icon.png');
-
-export default function CreateKosScreen(){
+export default function SettingsPage() {
     const [namaKos, setNamaKos] = useState('');
     const [alamat, setAlamat] = useState('');
     const [kontak, setKontak] = useState('');
@@ -21,6 +19,7 @@ export default function CreateKosScreen(){
     const [open, setOpen] = useState(false);
     const [namaBank, setNamaBank] = useState('');
     const [nomorBank, setNomorBank] = useState('');
+    const PlaceholderImage = require('@/assets/images/icon.png');
 
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({

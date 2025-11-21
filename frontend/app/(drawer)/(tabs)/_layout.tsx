@@ -1,14 +1,26 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Tabs } from "expo-router";
-import { BackHandler } from "react-native";
+import { Tabs, useNavigation } from "expo-router";
+import { BackHandler, Pressable } from "react-native";
 
 export default function TabsLayout() {
+
+  const navigation = useNavigation<any>();
   
   return (
     <Tabs screenOptions={{ 
       tabBarActiveTintColor: '#55C595', 
       tabBarShowLabel: false,
-      headerShown: false
+      headerShown: false,
+      tabBarStyle: {
+        borderTopColor: '#000000',
+        borderTopWidth: 0.7,
+        height: 85,
+      },
+      headerLeft: () => (
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Ionicons name="menu" size={24} style={{ marginLeft: 10, marginRight: 20, color: '#fff' }} />
+        </Pressable>
+      ),
     }}>
       <Tabs.Screen
         name="index"

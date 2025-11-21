@@ -3,7 +3,7 @@ import {TextInput} from 'react-native-paper';
 import { useState } from "react";
 import { Link, router } from "expo-router";
 import { CustomButton } from "@/components/customBtn";
-import HomeScreen from "../(tabs)";
+import HomeScreen from "../(drawer)/(tabs)";
 
 export default function LoginScreen(){
     const [email, setEmail] = useState('');

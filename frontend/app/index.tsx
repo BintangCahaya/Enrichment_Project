@@ -1,7 +1,7 @@
-import HomeScreen from "./(tabs)";
+import HomeScreen from "./(drawer)/(tabs)";
 import CreateKosScreen from "./createKosScreen";
 import LoginScreen from "./auth";
-import TenantScreen from "./(tabs)/tenants";
+import TenantScreen from "./(drawer)/(tabs)/tenants";
 
 export default function Index(){
     return <LoginScreen/>;
