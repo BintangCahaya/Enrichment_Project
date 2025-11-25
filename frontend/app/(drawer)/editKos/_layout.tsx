@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, Stack, useNavigation } from "expo-router";
 import { Pressable } from "react-native";
 
-export default function SettingsStack() {
+export default function EditKosStack() {
 
     const navigation = useNavigation<any>();
     return (

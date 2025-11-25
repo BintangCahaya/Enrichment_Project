@@ -9,7 +9,7 @@ import CustomPopup from "@/components/customPopup";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
-export default function SettingsPage() {
+export default function EditKosPage() {
     const [namaKos, setNamaKos] = useState('');
     const [alamat, setAlamat] = useState('');
     const [kontak, setKontak] = useState('');
@@ -39,7 +39,7 @@ export default function SettingsPage() {
     return(
         <View style={styles.container}>
             <ScrollView style={styles.formContainer}>
-                <Pressable onPress={pickImageAsync}>
+                <Pressable onPress={pickImageAsync} style={{marginBottom: 10}}>
                     <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
                 </Pressable>
                 <TextInput
@@ -74,21 +74,10 @@ export default function SettingsPage() {
                         onChangeText={setNomorBank}
                     />
                 </DropDown>
-                <View style={styles.divider}/>
-                <View style={{alignItems: 'flex-end'}}>
-                    <CustomButton title="Add Room" buttonStyle={{width: '30%', borderRadius: 30}} textStyle={{fontSize: 15}} onPress={() => setShowPopup(true)}/>
-                </View>
-                <CustomPopup style={{height: '80%'}} visible={showPopup} onClose={() => setShowPopup(false)}>
-                    <AddRoomModal onClose={() => setShowPopup(false)}/>
-                </CustomPopup>
-                <View style={styles.roomInfoContainer}>
-                    <Text>Room 001</Text>
-                    <Text>Edit detail</Text>
-                </View>
             </ScrollView>
             <SafeAreaView style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Submit" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(drawer)/(tabs)')}/>
+                <CustomButton title="Save" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(drawer)/(tabs)')}/>
             </SafeAreaView>
         </View>
     );
@@ -106,7 +95,7 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         padding: 10,
-        marginVertical: 10,
+        marginVertical: 5,
         borderRadius: 10,
         borderColor: '#8d8d8d',
         borderWidth: 1,
@@ -117,14 +106,6 @@ const styles = StyleSheet.create({
         width: '100%',
         borderColor: '#8d8d8d',
         marginTop: 20
-    },
-    roomInfoContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderWidth: 0.7,
-        padding: 20,
-        borderRadius: 10
     },
     bottomContainer: {
         position: 'absolute',

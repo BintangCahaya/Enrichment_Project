@@ -15,10 +15,11 @@ export default function TabsLayout() {
         borderTopColor: '#000000',
         borderTopWidth: 0.7,
         height: 85,
+        paddingTop: 5
       },
       headerLeft: () => (
         <Pressable onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu" size={24} style={{ marginLeft: 10, marginRight: 20, color: '#fff' }} />
+          <Ionicons name="menu" size={24} style={{ marginLeft: 20, marginRight: 20, color: '#fff' }} />
         </Pressable>
       ),
     }}>
