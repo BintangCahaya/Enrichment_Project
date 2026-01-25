@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# env
+.env
+
+# database
+*.db
+src/db/*.db
+
+# logs
+npm-debug.log*
