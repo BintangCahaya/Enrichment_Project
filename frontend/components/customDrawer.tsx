@@ -2,13 +2,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomIcon from "./customIcon";
 
 export default function CustomDrawer(props : any) {
     return(
         <View style={{flex: 1}}>
             <View style={styles.profileContainer}>
-                <Ionicons name="people-circle-outline" size={100} color='#fff'/>
-                <View>
+                <CustomIcon name="profile" size={100} color='#fff'/>
+                <View style={{marginLeft: 10}}>
                     <Text style={[styles.globalText, {fontSize: 20}]}>John Doe</Text>
                     <Text style={styles.globalText}>JohnDoe@gmail.com</Text>
                     <Text style={styles.globalText}>+6212345</Text>

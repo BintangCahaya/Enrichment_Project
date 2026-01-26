@@ -7,17 +7,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import TenantCard from "./tenantCard";
 import PopupHeader from "./popupHeader";
+import { roomApi } from "@/api/room.api";
+import { Room } from "@/types/Room";
+import axios from "axios";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
-export default function EditRoomModal({ onClose }: { onClose: () => void }){
-    const [namaUnit, setNamaUnit] = useState('');
-    const [namaArea, setNamaArea] = useState('');
+export default function EditRoomModal({ onClose, room }: { onClose: () => void, room: Room }){
+    const [namaUnit, setNamaUnit] = useState(room.room_name);
+    const [namaArea, setNamaArea] = useState(room.area);
     const [jumlah, setJumlah] = useState('');
     const [waktu, setWaktu] = useState('');
-    const [hargaPerBulan, setHargaPerBulan] = useState('');
-    const [hargaPerTahun, setHargaPerTahun] = useState('');
-    const [deskripsi, setDeskripsi] = useState('');
+    const [hargaPerBulan, setHargaPerBulan] = useState<string>('');
+    const [hargaPerTahun, setHargaPerTahun] = useState<string>('');
+    const [deskripsi, setDeskripsi] = useState(room.description);
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
     const pickImageAsync = async () => {
@@ -31,6 +34,21 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
             setSelectedImage(result.assets[0].uri);
         } else {
             alert('You did not select any image.');
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+
+            const response = await roomApi.deleteRoom(room.id);
+            alert('Success');
+            onClose();
+            router.navigate('/(drawer)/(tabs)');
+        } catch (error : any) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.response?.status); // 400
+                console.log(error.response?.data);   // pesan dari backend
+            }
         }
     };
 
@@ -90,7 +108,7 @@ export default function EditRoomModal({ onClose }: { onClose: () => void }){
                     textAlignVertical="top"
                 />
                 <View style={{alignItems: 'center'}}>
-                    <CustomButton title="Remove Room" buttonStyle={{backgroundColor: 'red', width: '80%'}} onPress={() => alert('Tenant removed')}/>
+                    <CustomButton title="Remove Room" buttonStyle={{backgroundColor: 'red', width: '80%'}} onPress={handleDelete}/>
                 </View>
             </View>
             <View style={styles.bottomContainer}>

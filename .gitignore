@@ -27,3 +27,6 @@ build/
 # Editor folders
 .vscode/
 .idea/
+
+data.db
+backend

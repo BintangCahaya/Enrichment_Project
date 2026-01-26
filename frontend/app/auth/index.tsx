@@ -1,17 +1,32 @@
 import { View, Text, StyleSheet} from "react-native";
 import {TextInput} from 'react-native-paper';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { roomApi } from "@/api/room.api";
 import { Link, router } from "expo-router";
 import { CustomButton } from "@/components/customBtn";
 import HomeScreen from "../(drawer)/(tabs)";
+import { kosApi } from "@/api/kos.api";
 
 export default function LoginScreen(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(true);
-    const [room, setRoom] = useState(0);
+    const [kos, setKos] = useState([]);
     const [error, setError] = useState('');
     const googleIcon = require('@/assets/images/googleIcon.png');
+
+    useEffect(()=>{
+        fetchKos();
+    }, []);
+
+    const fetchKos = async () => {
+        try {
+            const response = await kosApi.getKos();
+            setKos(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const validate = () => {
         if(!email || !password){
@@ -33,7 +48,7 @@ export default function LoginScreen(){
         if(!validate()) return;
 
         if (email === 'test1234' && password === 'test1234'){
-            room == 0 ? router.replace("/getStartedScreen") : router.replace('/(tabs)')
+            kos.length == 0 ? router.replace("/getStartedScreen") : router.replace('/(drawer)/(tabs)')
         }else{
             alert('Wrong email or password');
         }

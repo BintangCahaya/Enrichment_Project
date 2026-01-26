@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "KosKu",
-    "slug": "KosKu",
+    "name": "KosFlow",
+    "slug": "KosFlow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "kosku",
+    "scheme": "kosflow",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -39,7 +39,8 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,

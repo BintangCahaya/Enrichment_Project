@@ -1,19 +1,51 @@
+import CustomIcon from "@/components/customIcon";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useEffect, useState } from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-paper";
+import { kosApi } from "@/api/kos.api";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Kos } from "@/types/Kos";
+import { roomApi } from "@/api/room.api";
+import { Room } from "@/types/Room";
 
 export default function HomeScreen(){
 
-    const bedIcon = require('@/assets/images/bed.png');
+    const[kos, setKos] = useState<Kos | null>(null);
+    const[room, setRoom] = useState<Room[]>([]);
+    const occupiedRoom = room.filter((r) => r.status === "Occupied").length;
+    const totalRoom = room.length;
+
+    const fetchKos = async () => {
+        try {
+            const response = await kosApi.getKosById(1);
+            setKos(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const fetchRoom = async () => {
+        try {
+            const response = await roomApi.getRoom(1);
+            setRoom(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchKos();
+        fetchRoom();
+    }, []);
 
     return(
         <View style={styles.container}>
             <View style={styles.kosContainer}>
                 <ImageBackground source={require('@/assets/images/Kos.jpg')} resizeMode="cover" style={styles.image}>
                     <View style={styles.overlay}>
-                        <Text style={styles.kosTitle}>Kos ABC</Text>
-                        <Text style={styles.address}>Jalan 9</Text>
+                        <Text style={styles.kosTitle}>{kos?.name}</Text>
+                        <Text style={styles.address}>{kos?.address}</Text>
                         <Text style={styles.totalRoom}>16 Unit kamar</Text>
                     </View>
                 </ImageBackground>
@@ -21,10 +53,10 @@ export default function HomeScreen(){
             <View style={styles.roomContainer}>
                 <View style={styles.roomInfoContainer}>
                     <Text style={styles.roomInfoTitle}>Kamar Terisi</Text>
-                    <Text style={styles.roomInfoDetail}>9/16</Text>
+                    <Text style={styles.roomInfoDetail}>{occupiedRoom}/{totalRoom}</Text>
                 </View>
                 <View style={{alignSelf: 'center', marginRight: 20}}>
-                    <Image source={bedIcon} tintColor="#fff" style={{height: 100, width: 100}}/>
+                    <CustomIcon name="bed" size={100} color="#fff"/>
                 </View>
             </View>
             <View style={styles.statusContainer}>

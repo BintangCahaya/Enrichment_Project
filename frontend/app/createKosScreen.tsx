@@ -3,24 +3,35 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { kosApi } from "@/api/kos.api";
 import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from "@/components/imageViewer";
 import CustomPopup from "@/components/customPopup";
 import AddRoomModal from "@/components/addRoomModal";
 import DropDown from "@/components/dropDown";
+import axios from "axios";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 export default function CreateKosScreen(){
-    const [namaKos, setNamaKos] = useState('');
-    const [alamat, setAlamat] = useState('');
-    const [kontak, setKontak] = useState('');
-    const [metode, setMetode] = useState('');
+    // const [namaKos, setNamaKos] = useState('');
+    // const [alamat, setAlamat] = useState('');
+    // const [kontak, setKontak] = useState('');
+    // const [metode, setMetode] = useState('');
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
     const [showPopup, setShowPopup] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [namaBank, setNamaBank] = useState('');
-    const [nomorBank, setNomorBank] = useState('');
+    // const [open, setOpen] = useState(false);
+    // const [namaBank, setNamaBank] = useState('');
+    // const [nomorBank, setNomorBank] = useState('');
+    const [form, setForm] = useState({
+        namaKos: '',
+        alamat: '',
+        kontak: '',
+        metode: 'Bank',
+        namaBank: '',
+        nomorBank: '',
+        imageUrl: '',
+    });
 
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,49 +41,75 @@ export default function CreateKosScreen(){
         });
 
         if (!result.canceled) {
-        setSelectedImage(result.assets[0].uri);
+        handleChange('imageUrl', result.assets[0].uri);
         } else {
         alert('You did not select any image.');
         }
     };
 
+    const handleChange = (key: keyof typeof form, value: string) => {
+        setForm((prev) => ({...prev, [key]: value}))
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const payload = {
+                name: form.namaKos,
+                address: form.alamat,
+                contact: form.kontak,
+                payment_method: form.metode,
+                bank_name: form.namaBank,
+                account_number: form.nomorBank,
+                image_url: form.imageUrl
+            };
+
+            const response = await kosApi.createKos(payload);
+            alert('Success');
+            router.navigate('/(drawer)/(tabs)');
+        } catch (error : any) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.response?.status); // 400
+                console.log(error.response?.data);   // pesan dari backend
+            }
+        }
+    };
 
     return(
         <View style={styles.container}>
             <ScrollView style={styles.formContainer}>
                 <Pressable onPress={pickImageAsync}>
-                    <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+                    <ImageViewer imgSource={PlaceholderImage} selectedImage={form.imageUrl} />
                 </Pressable>
                 <TextInput
                     style={styles.input}
                     placeholder="Nama Kos" 
-                    value={namaKos}
-                    onChangeText={setNamaKos}
+                    value={form.namaKos}
+                    onChangeText={(text) => handleChange('namaKos',text)}
                 />
                 <TextInput 
                     style={styles.input}
                     placeholder="Alamat" 
-                    value={alamat}
-                    onChangeText={setAlamat}
+                    value={form.alamat}
+                    onChangeText={(text) => handleChange('alamat',text)}
                 />
                 <TextInput 
                     style={styles.input}
                     placeholder="Kontak" 
-                    value={kontak}
-                    onChangeText={setKontak}
+                    value={form.kontak}
+                    onChangeText={(text) => handleChange('kontak',text)}
                 />
                 <DropDown title="Payment Method">
                     <TextInput 
                         style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
                         placeholder="Nama Bank" 
-                        value={namaBank}
-                        onChangeText={setNamaBank}
+                        value={form.namaBank}
+                        onChangeText={(text) => handleChange('namaBank',text)}
                     />
                     <TextInput 
                         style={[styles.input, {width: '90%', alignSelf: 'flex-end'}]}
                         placeholder="Nomor Bank" 
-                        value={nomorBank}
-                        onChangeText={setNomorBank}
+                        value={form.nomorBank}
+                        onChangeText={(text) => handleChange('nomorBank',text)}
                     />
                 </DropDown>
                 <View style={styles.divider}/>
@@ -89,7 +126,7 @@ export default function CreateKosScreen(){
             </ScrollView>
             <SafeAreaView style={styles.bottomContainer}>
                 <View style={[styles.divider, {backgroundColor: '#ccc'}]}/>
-                <CustomButton title="Submit" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={() => router.navigate('/(drawer)/(tabs)')}/>
+                <CustomButton title="Submit" buttonStyle={{width: '60%', alignSelf: 'center'}} onPress={handleSubmit}/>
             </SafeAreaView>
         </View>
     );

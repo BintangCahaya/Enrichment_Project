@@ -23,7 +23,7 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
             <View style={[styles.roomNumber, {backgroundColor: room.status == 'kosong' ? '#8d8d8d' : '#55C595'}]}>
               <Image source={bedIcon} tintColor='#fff'/>
-              <Text style={[styles.globalText, {color: '#fff'}]}>{room.roomNumber}</Text>
+              <Text style={[styles.globalText, {color: '#fff'}]}>{room.room_name}</Text>
             </View>
             <Text style={[styles.globalText, {color: room.status == 'kosong' ? '#8d8d8d' : '#55C595', fontSize: 30, lineHeight: 28}]}>{room.status}</Text>
           </View>
@@ -47,7 +47,7 @@ export default function RoomDetailModal({ visible, onClose, room }: any) {
       </View>
       <CustomButton title="Edit kamar" buttonStyle={{width: '30%', alignSelf: 'flex-end', marginRight: 20, borderRadius: 15}} onPress={() => setEditModalVisible(true)}/>
       <CustomPopup style={{height: '85%'}} visible={isEditModalVisible} onClose={() => setEditModalVisible(false)}>
-        <EditRoomModal onClose={() => setEditModalVisible(false)}/>
+        <EditRoomModal onClose={() => setEditModalVisible(false)} room={room}/>
       </CustomPopup>
       <CustomPopup style={{height: '70%'}} visible={isAssignModalVisible} onClose={() => setAssignModalVisible(false)}>
         <AssignTenantModal room={room} onClose={() => setAssignModalVisible(false)}/>
